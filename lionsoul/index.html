@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lionsoul Global — Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #111113;
+  --border: rgba(255,255,255,0.08);
+  --accent: #c8ff00;
+  --accent-dim: rgba(200,255,0,0.15);
+  --text: #f0f0f0;
+  --text-80: rgba(240,240,240,0.8);
+  --text-50: rgba(240,240,240,0.5);
+  --text-30: rgba(240,240,240,0.3);
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ── Reveal ── */
+.reveal { opacity: 1; transform: none; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(10,10,10,0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-50);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── Container ── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+section { padding: 140px 0; }
+
+/* ── Section Label ── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '//';
+  color: var(--text-30);
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-30);
+}
+
+/* ── Section Title ── */
+.section-title {
+  font-family: var(--sans);
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 48px;
+}
+.section-title .highlight,
+.hero-title .highlight {
+  color: var(--accent);
+}
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-phones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── iPhone Frame ── */
+.iphone {
+  position: relative;
+  flex-shrink: 0;
+  background: transparent;
+  padding: 0;
+  border-radius: 36px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.iphone-screen {
+  position: relative;
+  background: #000;
+  border-radius: 36px;
+  overflow: hidden;
+}
+.iphone-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* Dynamic Island */
+.iphone-screen::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 22px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 10;
+}
+/* Side buttons removed */
+
+.iphone-side {
+  width: 210px;
+  animation: float1 5s ease-in-out infinite;
+}
+.iphone-side:last-child {
+  animation: float3 5s ease-in-out 0.8s infinite;
+}
+.iphone-center {
+  width: 230px;
+  animation: float2 5s ease-in-out 0.4s infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+.bg-glow {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(200,255,0,0.06) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero-top-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-50);
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 2;
+}
+.hero-title {
+  font-family: var(--sans);
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 72px;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+.hero-subtitle {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--text-50);
+  text-align: center;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 2;
+}
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hero-bottom-bar .marquee {
+  display: inline-flex;
+  animation: marquee 20s linear infinite;
+}
+.hero-bottom-bar span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-30);
+  padding: 20px 48px;
+  display: inline-block;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Divider ── */
+.divider {
+  display: none;
+}
+
+/* ── Card Frame ── */
+.card-frame {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  background: var(--surface);
+}
+
+/* ── About Grid ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: stretch;
+}
+.about-left {
+  display: flex;
+  flex-direction: column;
+}
+.about-subtitle {
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 300;
+  color: var(--text-80);
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+.about-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  max-width: 480px;
+}
+.meta-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--text-30);
+  text-transform: uppercase;
+  min-width: 80px;
+}
+.meta-value {
+  font-weight: 500;
+  font-size: 16px;
+}
+.about-image {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  align-self: stretch;
+}
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Role Banner ── */
+.role-banner {
+  border: 1px solid var(--accent-dim);
+  border-radius: 20px;
+  padding: 48px 56px;
+  background: linear-gradient(135deg, rgba(200,255,0,0.04) 0%, transparent 60%);
+}
+.role-text {
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.role-sub {
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--text-50);
+  line-height: 1.5;
+}
+.role-sub strong { color: var(--accent); font-weight: 600; }
+
+/* ── Context Grid ── */
+.context-grid {
+  display: grid;
+  grid-template-columns: 480px 1fr 320px;
+  gap: 80px;
+  align-items: center;
+}
+.context-phone { grid-column: 3; transform: translateX(-200px); }
+.context-phone img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.context-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.context-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: clamp(18px, 2vw, 26px);
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-80);
+  max-width: 480px;
+}
+.context-item .idx {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-30);
+  min-width: 24px;
+}
+
+/* ── Challenges ── */
+.challenges-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.challenge-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  background: var(--surface);
+  transition: border-color 0.3s;
+}
+.challenge-card:hover { border-color: var(--accent-dim); }
+.challenge-num {
+  font-family: var(--sans);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+  line-height: 1;
+}
+.challenge-title {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.challenge-desc {
+  font-size: 15px;
+  color: var(--text-50);
+}
+
+/* ── Time-to-market stat ── */
+.ttm-stat { margin-top: 48px; }
+.ttm-bar { margin-bottom: 24px; }
+.ttm-bar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.ttm-bar-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-50);
+}
+.ttm-bar-val { font-size: 24px; font-weight: 700; }
+.ttm-bar.before .ttm-bar-val { color: var(--text-30); }
+.ttm-bar.after .ttm-bar-val { color: var(--accent); }
+.ttm-bar-track {
+  height: 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.ttm-bar-fill { height: 100%; border-radius: 6px; }
+.ttm-bar.before .ttm-bar-fill { background: var(--text-30); width: 100%; }
+.ttm-bar.after .ttm-bar-fill { background: var(--accent); width: 33%; }
+.ttm-note {
+  font-size: 14px;
+  color: var(--text-50);
+  line-height: 1.5;
+  max-width: 480px;
+  margin-top: 32px;
+}
+
+/* ── Strategy ── */
+.strategy-block {
+  margin-bottom: 64px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--border);
+}
+.strategy-block:last-child { border-bottom: none; }
+.strategy-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.strategy-text {
+  font-size: clamp(26px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text-80);
+}
+
+/* ── Time Bar ── */
+.time-section { margin-top: 64px; }
+.time-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-50);
+  margin-bottom: 24px;
+}
+.time-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+}
+.time-bar-fill {
+  background: var(--accent);
+  border-radius: 4px;
+  width: 0;
+  transition: width 1.2s ease;
+}
+.time-bar-fill.animate { width: var(--w); }
+.time-bar-rest {
+  background: rgba(255,255,255,0.15);
+  flex: 1;
+  border-radius: 0 4px 4px 0;
+}
+.time-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-30);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Full Image ── */
+.full-image {
+  width: 100%;
+}
+
+/* ── Testimonials ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.testimonial-card {
+  padding: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.testimonial-quote {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 32px;
+  flex: 1;
+}
+.testimonial-quote::before { content: '"'; color: var(--accent); margin-right: 4px; }
+.testimonial-quote::after { content: '"'; color: var(--accent); margin-left: 2px; }
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.testimonial-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+.testimonial-info { flex: 1; }
+.testimonial-name { font-size: 16px; font-weight: 600; }
+.testimonial-role {
+  font-size: 13px;
+  color: var(--text-50);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.testimonial-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  padding: 8px 14px;
+  border-radius: 100px;
+  transition: background 0.2s ease;
+}
+.testimonial-link:hover { background: var(--accent-dim); }
+@media (max-width: 900px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Screens Row ── */
+.screens-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  align-items: end;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.screens-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  will-change: transform;
+}
+.screens-row img:nth-child(1) { animation: float1 6s ease-in-out 0s infinite; width: 96%; margin: 0 auto; }
+.screens-row img:nth-child(2) { animation: float2 5.5s ease-in-out 0.3s infinite; }
+.screens-row img:nth-child(3) { animation: float3 6.5s ease-in-out 0.6s infinite; }
+.screens-row img:nth-child(4) { animation: float1 5.8s ease-in-out 0.9s infinite; }
+.screens-row img:nth-child(5) { animation: float2 6.2s ease-in-out 1.2s infinite; }
+.screens-row img:nth-child(6) { animation: float3 5.6s ease-in-out 1.5s infinite; }
+@media (max-width: 900px) {
+  .screens-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+}
+.full-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Behind Section ── */
+.behind-item {
+  margin-bottom: 80px;
+}
+.behind-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.behind-title {
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.behind-title .num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.behind-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: opacity 0.2s;
+}
+.behind-link:hover { opacity: 0.7; }
+.behind-img {
+  width: 100%;
+}
+.behind-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Dramatic Text ── */
+.dramatic {
+  padding: 200px 48px 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: left;
+}
+.scroll-arrow {
+  display: block;
+  margin: 40px auto 0;
+  width: 32px;
+  height: 32px;
+  color: var(--text-30);
+  animation: gentleFloat 2.4s ease-in-out infinite;
+}
+.scroll-arrow svg { width: 100%; height: 100%; }
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(12px); opacity: 1; }
+}
+.dramatic-big {
+  font-family: var(--sans);
+  font-size: clamp(60px, 12vw, 160px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 160px;
+}
+.dramatic-reveal {
+  font-family: var(--sans);
+  font-size: clamp(28px, 4.5vw, 56px);
+  font-weight: 300;
+  color: var(--text-50);
+  text-align: right;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.dramatic-reveal .pop { color: var(--accent); font-weight: 600; }
+
+/* ── Iceberg ── */
+.iceberg-section {
+  padding: 40px 0 120px;
+}
+.iceberg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.iceberg .tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+.iceberg .tip-item {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text);
+}
+.iceberg .arrow { color: var(--text-30); font-size: 14px; }
+.iceberg .waterline {
+  width: 70%;
+  height: 1px;
+  background: var(--accent);
+}
+.iceberg .mass {
+  padding-top: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.iceberg .mass-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 900px;
+  justify-content: center;
+}
+.iceberg .mass-item {
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 14px;
+  color: var(--text-80);
+  background: var(--surface);
+  cursor: default;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.iceberg .mass-item:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 24px rgba(200,255,0,0.25);
+}
+
+/* ── Photo Grid ── */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 720px;
+}
+.photo-grid-tall { grid-row: 1 / 3; }
+.grid-img {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  height: 100%;
+  width: 100%;
+}
+.grid-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Current State ── */
+.current-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 48px;
+}
+.current-item {
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: var(--text-80);
+  line-height: 1.5;
+  padding: 28px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+.current-item::before {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 0.7em;
+}
+
+/* ── Outcomes ── */
+.outcomes-bar { margin-top: 64px; }
+.outcomes-bar-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .container { padding: 0 24px; }
+  .nav { padding: 16px 24px; }
+  section { padding: 100px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-image { height: 300px; }
+  .context-grid { grid-template-columns: 1fr; gap: 40px; }
+  .challenges-grid { grid-template-columns: 1fr; gap: 24px; }
+  .photo-grid { grid-template-columns: 1fr; }
+  .photo-grid-tall { grid-row: auto; }
+  .hero-content { flex-direction: column; align-items: flex-start; gap: 24px; padding: 0 24px 60px; }
+  .hero-meta { text-align: left; }
+  .role-banner { padding: 32px; border-radius: 16px; }
+  .dramatic { padding: 120px 0; }
+  .dramatic-big { margin-bottom: 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav">
+  <div class="nav-logo">Alina Mamina</div>
+  <ul class="nav-links">
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="bg-glow"></div>
+  <h1 class="hero-title">Lionsoul <span class="highlight">Global</span></h1>
+  <p class="hero-subtitle">Mobile-first investment platform for high net worth individuals</p>
+  <div class="hero-phones">
+    <div class="iphone iphone-side">
+      <div class="iphone-screen">
+        <img src="images/phone-1.png" alt="Portfolio">
+      </div>
+    </div>
+    <div class="iphone iphone-center">
+      <div class="iphone-screen">
+        <img src="images/phone-2.png" alt="Welcome">
+      </div>
+    </div>
+    <div class="iphone iphone-side">
+      <div class="iphone-screen">
+        <img src="images/phone-3.png" alt="Analytics">
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom-bar">
+    <div class="marquee">
+      <span>Architecture</span><span>·</span>
+      <span>User flows</span><span>·</span>
+      <span>Layouts</span><span>·</span>
+      <span>Components</span><span>·</span>
+      <span>Token system</span><span>·</span>
+      <span>Accessibility standards</span><span>·</span>
+      <span>Documentation</span><span>·</span>
+      <span>New processes</span><span>·</span>
+      <span>Architecture</span><span>·</span>
+      <span>User flows</span><span>·</span>
+      <span>Layouts</span><span>·</span>
+      <span>Components</span><span>·</span>
+      <span>Token system</span><span>·</span>
+      <span>Accessibility standards</span><span>·</span>
+      <span>Documentation</span><span>·</span>
+      <span>New processes</span><span>·</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ABOUT ═══ -->
+<section>
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="section-label">About</div>
+        <h2 class="section-title reveal">The UK financial company with its investment <span class="highlight">products</span></h2>
+        <div class="about-meta">
+          <div class="meta-row">
+            <span class="meta-label">Stage</span>
+            <span class="meta-value">Market entry</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Users</span>
+            <span class="meta-value">High net worth individuals</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Markets</span>
+            <span class="meta-value">EU, UK & US</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-image reveal">
+        <img src="images/image 2.png" alt="London at night">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROLE ═══ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="role-banner reveal">
+      <p class="role-text">I was assigned to build the mobile app to make the business mobile-first</p>
+      <p class="role-sub"><strong>My role:</strong> the only designer on the product, also taking on part of the project manager's responsibilities</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1280px; margin:0 auto;"></div>
+
+<!-- ═══ PRODUCT CONTEXT ═══ -->
+<section>
+  <div class="container">
+    <div class="context-grid">
+      <div>
+        <div class="section-label">Context</div>
+        <h2 class="section-title reveal">Product <span class="highlight">context</span></h2>
+        <div class="context-list">
+          <div class="context-item reveal">
+            <span class="idx">01</span>
+            the pre-release app
+          </div>
+          <div class="context-item reveal">
+            <span class="idx">02</span>
+            lack of a design system
+          </div>
+          <div class="context-item reveal">
+            <span class="idx">03</span>
+            long time-to-market
+          </div>
+        </div>
+      </div>
+      <div class="context-phone reveal">
+        <video src="videos/product-context.webm" autoplay loop muted playsinline aria-label="Pre-release app screencast" style="width:100%; height:auto; display:block;"></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHALLENGES ═══ -->
+<section>
+  <div class="container">
+    <div class="section-label">Challenges</div>
+    <h2 class="section-title reveal">What we needed<br>to <span class="highlight">solve</span></h2>
+    <div class="challenges-grid">
+      <div class="challenge-card reveal">
+        <div class="challenge-num">01</div>
+        <div class="challenge-title">Release the app<br>to the stores</div>
+        <div class="challenge-desc">Deadline: 3 months</div>
+      </div>
+      <div class="challenge-card reveal">
+        <div class="challenge-num">02</div>
+        <div class="challenge-title">Reduce<br>time-to-market</div>
+        <div class="challenge-desc">Through change the design system and processes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1280px; margin:0 auto;"></div>
+
+<!-- ═══ STRATEGY ═══ -->
+<section>
+  <div class="container">
+    <div class="section-label">Strategy</div>
+    <h2 class="section-title reveal">My <span class="highlight">approach</span></h2>
+
+    <div class="strategy-block reveal">
+      <div class="strategy-label">Goal #1</div>
+      <div class="strategy-text">Reduce time-to-market → release faster, stay scalable, save costs</div>
+    </div>
+    <div class="strategy-block reveal">
+      <div class="strategy-label">How</div>
+      <div class="strategy-text">Build a code-oriented, scalable design system based on clean design principles</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ AFTER 3 MONTHS ═══ -->
+<section style="text-align:center;">
+  <div class="container">
+    <div class="section-label" style="justify-content:center;">Result</div>
+    <h2 class="section-title reveal" style="text-align:center;">After 3 months<br>of <span class="highlight">work</span></h2>
+    <div class="full-image reveal">
+      <img src="images/image 4.png" alt="App screens showcase">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUTCOMES ═══ -->
+<section>
+  <div class="container">
+    <div class="section-label">Outcomes</div>
+    <h2 class="section-title reveal">What we <span class="highlight">achieved</span></h2>
+    <div class="challenges-grid">
+      <div class="challenge-card reveal">
+        <div class="challenge-num">01</div>
+        <div class="challenge-title">Released the app<br>to the stores</div>
+        <div class="challenge-desc">Delivered within the 3-month deadline</div>
+        <div style="margin-top:24px; border-radius:12px; overflow:hidden;">
+          <img src="images/image 5.png" alt="App Store" style="width:100%; height:auto; display:block;">
+        </div>
+      </div>
+      <div class="challenge-card reveal">
+        <div class="challenge-num">02</div>
+        <div class="challenge-title">Time-to-market<br>improved</div>
+        <div class="challenge-desc">Through change the design system and processes</div>
+        <div class="ttm-stat">
+          <div class="ttm-bar before">
+            <div class="ttm-bar-head"><span class="ttm-bar-label">Before · Withdrawal flow</span><span class="ttm-bar-val">6 weeks</span></div>
+            <div class="ttm-bar-track"><div class="ttm-bar-fill"></div></div>
+          </div>
+          <div class="ttm-bar after">
+            <div class="ttm-bar-head"><span class="ttm-bar-label">After · MFA flow</span><span class="ttm-bar-val">2 weeks</span></div>
+            <div class="ttm-bar-track"><div class="ttm-bar-fill"></div></div>
+          </div>
+          <div class="ttm-note">Measured by comparing an average flow we built before (Withdrawal flow) against a flow built after the new system (MFA flow).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1280px; margin:0 auto;"></div>
+
+<!-- ═══ WHAT'S BEHIND ═══ -->
+<section>
+  <div class="container">
+    <div class="section-label">Process</div>
+    <h2 class="section-title reveal">What's behind <span class="highlight">this?</span></h2>
+
+    <div class="behind-item reveal">
+      <div class="behind-header">
+        <div class="behind-title"><span class="num">01</span> Information architecture refactoring</div>
+      </div>
+      <div class="behind-img">
+        <img src="images/image 6.png" alt="Information Architecture">
+      </div>
+    </div>
+
+    <div class="behind-item reveal">
+      <div class="behind-header">
+        <div class="behind-title"><span class="num">02</span> New user flows</div>
+        <span class="behind-link">Example</span>
+      </div>
+      <div class="behind-img">
+        <img src="images/image 7.png" alt="User flows">
+      </div>
+    </div>
+
+    <div class="behind-item reveal">
+      <div class="behind-header">
+        <div class="behind-title"><span class="num">03</span> New layouts</div>
+        <span class="behind-link">Example</span>
+      </div>
+      <div class="behind-img" style="margin-bottom:24px;">
+        <img src="images/image 8.png" alt="Layouts">
+      </div>
+      <div class="behind-img">
+        <img src="images/image 9.png" alt="MFA flow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BUT... ═══ -->
+<section class="dramatic">
+  <div class="dramatic-big reveal">But...</div>
+  <div class="dramatic-reveal reveal">
+    ...this is just the <span class="pop">tip</span> of the iceberg
+  </div>
+  <div class="scroll-arrow" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 4v16M5 13l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ ICEBERG ═══ -->
+<section class="iceberg-section">
+  <div class="container">
+    <div class="iceberg reveal">
+      <div class="tip">
+        <div class="tip-item">Architecture</div>
+        <div class="arrow">↓</div>
+        <div class="tip-item">User flows</div>
+        <div class="arrow">↓</div>
+        <div class="tip-item">Layouts</div>
+        <div class="arrow">↓</div>
+        <div class="tip-item">Components</div>
+      </div>
+      <div class="waterline"></div>
+      <div class="mass">
+        <div class="mass-grid">
+          <span class="mass-item">Multi-platform token system</span>
+          <span class="mass-item">Platform mode</span>
+          <span class="mass-item">Accessibility standards</span>
+          <span class="mass-item">Agreed naming with devs</span>
+          <span class="mass-item">Color palette</span>
+          <span class="mass-item">Typography scale</span>
+          <span class="mass-item">Spacing &amp; grid system</span>
+          <span class="mass-item">Icon library</span>
+          <span class="mass-item">Motion principles</span>
+          <span class="mass-item">Component states &amp; variants</span>
+          <span class="mass-item">Dark / light theming</span>
+          <span class="mass-item">Localization</span>
+          <span class="mass-item">Documentation</span>
+          <span class="mass-item">Agreed layer &amp; project structure with devs</span>
+          <span class="mass-item">Design QA &amp; review process</span>
+          <span class="mass-item">Versioning &amp; changelog</span>
+          <span class="mass-item">Handoff rituals</span>
+          <span class="mass-item">New processes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHOTO GRID ═══ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="photo-grid">
+      <div class="photo-grid-tall grid-img reveal">
+        <img src="images/image 11.png" alt="London Gherkin">
+      </div>
+      <div class="grid-img reveal">
+        <img src="images/image 12.png" alt="Lionsoul Global plaque">
+      </div>
+      <div class="grid-img reveal">
+        <img src="images/image 13.png" alt="Team working">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section>
+  <div class="container">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title reveal">What the <span class="highlight">tech leads said</span></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">I really enjoyed working with Alina — she works fast without losing quality in the details.</p>
+        <div class="testimonial-author">
+          <img class="testimonial-photo" src="images/lead-ios.jpeg" alt="Alexei Mikhailov">
+          <div class="testimonial-info">
+            <div class="testimonial-name">Alexei Mikhailov</div>
+            <div class="testimonial-role">iOS Tech Lead</div>
+          </div>
+          <a class="testimonial-link" href="https://www.linkedin.com/in/mikhailoval/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">Thanks to Alina the process became more systematic. In her work she thinks not only about her own part, but about the whole team.</p>
+        <div class="testimonial-author">
+          <img class="testimonial-photo" src="images/lead-android.jpeg" alt="Dima Chemekov">
+          <div class="testimonial-info">
+            <div class="testimonial-name">Dima Chemekov</div>
+            <div class="testimonial-role">Android Tech Lead</div>
+          </div>
+          <a class="testimonial-link" href="https://www.linkedin.com/in/d-chemekov/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW ARE THINGS NOW ═══ -->
+<section>
+  <div class="container">
+    <div class="section-label">Next steps</div>
+    <h2 class="section-title reveal">Next <span class="highlight">action points</span></h2>
+    <div class="current-list">
+      <div class="current-item reveal">Optimizing processes with AI</div>
+      <div class="current-item reveal">Scaling core principles to other products</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL MOCKUP ═══ -->
+<section style="padding-top:40px; padding-bottom:80px;">
+  <div class="screens-row reveal">
+    <img src="images/screen-1.png" alt="Analytics — Lionsoul strategy">
+    <img src="images/screen-2.png" alt="Splash screen">
+    <img src="images/screen-3.png" alt="Get started">
+    <img src="images/screen-4.png" alt="Strategy detail">
+    <img src="images/screen-5.png" alt="Welcome Thomas Müller">
+    <img src="images/screen-6.png" alt="Product question">
+  </div>
+</section>
+
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.time-bar-fill').forEach(b => b.classList.add('animate'));
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate'); });
+}, { threshold: 0.5 });
+document.querySelectorAll('.time-bar-fill').forEach(b => barObs.observe(b));
+</script>
+</body>
+</html>
