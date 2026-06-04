@@ -144,32 +144,14 @@ section { padding: 140px 0; }
   flex-shrink: 0;
   background: transparent;
   padding: 0;
-  border-radius: 36px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
 }
 .iphone-screen {
   position: relative;
-  background: #000;
-  border-radius: 36px;
-  overflow: hidden;
 }
 .iphone-screen img {
   display: block;
   width: 100%;
   height: auto;
-}
-/* Dynamic Island */
-.iphone-screen::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 72px;
-  height: 22px;
-  background: #000;
-  border-radius: 20px;
-  z-index: 10;
 }
 /* Side buttons removed */
 
@@ -244,6 +226,7 @@ section { padding: 140px 0; }
   left: 0;
   right: 0;
   border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   overflow: hidden;
   white-space: nowrap;
 }
@@ -299,16 +282,17 @@ section { padding: 140px 0; }
 .about-meta {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 .meta-row {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 14px 0;
+  padding: 24px 0;
   border-bottom: 1px solid var(--border);
   max-width: 480px;
 }
+.meta-row:last-child { border-bottom: none; }
 .meta-label {
   font-family: var(--mono);
   font-size: 12px;
@@ -381,6 +365,7 @@ section { padding: 140px 0; }
   color: var(--text-80);
   max-width: 480px;
 }
+.context-item:last-child { border-bottom: none; }
 .context-item .idx {
   font-family: var(--mono);
   font-size: 12px;
@@ -455,6 +440,16 @@ section { padding: 140px 0; }
   line-height: 1.5;
   max-width: 480px;
   margin-top: 32px;
+}
+.ttm-flow-img {
+  margin-top: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ttm-flow-img img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ── Strategy ── */
@@ -608,7 +603,19 @@ section { padding: 140px 0; }
 .screens-row img:nth-child(5) { animation: float2 6.2s ease-in-out 1.2s infinite; }
 .screens-row img:nth-child(6) { animation: float3 5.6s ease-in-out 1.5s infinite; }
 @media (max-width: 900px) {
-  .screens-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .screens-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 0 24px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .screens-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 0 16px;
+  }
 }
 .full-image img {
   width: 100%;
@@ -644,7 +651,7 @@ section { padding: 140px 0; }
 .behind-link {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--accent);
+  color: var(--text-50);
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -653,6 +660,23 @@ section { padding: 140px 0; }
 .behind-link:hover { opacity: 0.7; }
 .behind-img {
   width: 100%;
+}
+.behind-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.behind-row .behind-img {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.behind-row .behind-img img {
+  border-radius: 16px;
+}
+@media (max-width: 600px) {
+  .behind-row { grid-template-columns: 1fr; }
 }
 .behind-img img {
   width: 100%;
@@ -670,8 +694,8 @@ section { padding: 140px 0; }
 .scroll-arrow {
   display: block;
   margin: 40px auto 0;
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
   color: var(--text-30);
   animation: gentleFloat 2.4s ease-in-out infinite;
 }
@@ -821,18 +845,67 @@ section { padding: 140px 0; }
 @media (max-width: 900px) {
   .container { padding: 0 24px; }
   .nav { padding: 16px 24px; }
-  section { padding: 100px 0; }
+  section { padding: 60px 0; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .about-image { height: 300px; }
+  .about-image { height: auto; }
+  .about-image img { height: auto; }
   .context-grid { grid-template-columns: 1fr; gap: 40px; }
+  .context-phone { grid-column: auto; transform: none; justify-self: center; width: 60%; max-width: 320px; }
+  .context-item { max-width: 100%; }
+  .strategy-block { margin-bottom: 32px; padding-bottom: 32px; }
   .challenges-grid { grid-template-columns: 1fr; gap: 24px; }
-  .photo-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
   .photo-grid-tall { grid-row: auto; }
+  .grid-img img { height: auto; }
   .hero-content { flex-direction: column; align-items: flex-start; gap: 24px; padding: 0 24px 60px; }
+  .hero-phones { gap: 16px; padding: 0 16px; }
+  .iphone-side { width: 28vw; max-width: 160px; }
+  .iphone-center { width: 32vw; max-width: 180px; }
   .hero-meta { text-align: left; }
   .role-banner { padding: 32px; border-radius: 16px; }
-  .dramatic { padding: 120px 0; }
-  .dramatic-big { margin-bottom: 80px; }
+  .dramatic { padding: 20px 0 40px; }
+  .dramatic-big { margin-bottom: 80px; padding-left: 8vw; }
+  .iceberg-section { padding: 20px 0 60px; }
+  .scroll-arrow { margin-top: 24px; }
+  .current-item { padding: 14px 0; gap: 16px; }
+  .iceberg .waterline { width: calc(100% - 32px); }
+  .testimonial-author { flex-wrap: wrap; }
+  .testimonial-link { flex-basis: 100%; text-align: center; margin-top: 8px; }
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  .section-title { font-size: clamp(48px, 7.5vw, 72px); }
+  .hero-title { font-size: clamp(56px, 10vw, 96px); }
+  .hero-subtitle { font-size: clamp(16px, 2.2vw, 20px); }
+  .meta-value { font-size: 20px; }
+  .meta-label { font-size: 13px; }
+  .role-text { font-size: clamp(22px, 3vw, 28px); }
+  .role-sub { font-size: clamp(15px, 2vw, 18px); }
+  .context-item { font-size: clamp(20px, 2.6vw, 26px); }
+  .challenge-title { font-size: clamp(22px, 3vw, 28px); }
+  .challenge-desc { font-size: 16px; }
+  .strategy-text { font-size: clamp(22px, 3vw, 32px); }
+  .strategy-label { font-size: 13px; }
+  .behind-title { font-size: 22px; }
+  .current-item { font-size: clamp(20px, 2.6vw, 26px); }
+  .dramatic-reveal { font-size: clamp(32px, 5vw, 56px); }
+  .iceberg .tip-item { font-size: 28px; }
+  .iceberg .mass-item { font-size: 15px; }
+  .testimonial-quote { font-size: 22px; }
+  .testimonial-name { font-size: 18px; }
+  .ttm-bar-val { font-size: 28px; }
+  .ttm-note { font-size: 15px; }
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .about-image, .about-image img { height: 100%; }
+  .context-grid { grid-template-columns: 1fr 240px; gap: 40px; }
+  .context-phone { grid-column: auto; transform: none; width: 100%; max-width: 240px; justify-self: end; }
+  .context-item { max-width: 480px; }
+  .challenges-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 520px; gap: 12px; }
+  .photo-grid-tall { grid-row: 1 / 3; }
+  .grid-img, .grid-img img { height: 100%; }
+  .testimonial-author { flex-wrap: nowrap; }
+  .testimonial-link { flex-basis: auto; text-align: left; margin-top: 0; }
 }
 </style>
 </head>
@@ -872,23 +945,7 @@ section { padding: 140px 0; }
   </div>
   <div class="hero-bottom-bar">
     <div class="marquee">
-      <span>Architecture</span><span>·</span>
-      <span>User flows</span><span>·</span>
-      <span>Layouts</span><span>·</span>
-      <span>Components</span><span>·</span>
-      <span>Token system</span><span>·</span>
-      <span>Accessibility standards</span><span>·</span>
-      <span>Documentation</span><span>·</span>
-      <span>New processes</span><span>·</span>
-      <span>Architecture</span><span>·</span>
-      <span>User flows</span><span>·</span>
-      <span>Layouts</span><span>·</span>
-      <span>Components</span><span>·</span>
-      <span>Token system</span><span>·</span>
-      <span>Accessibility standards</span><span>·</span>
-      <span>Documentation</span><span>·</span>
-      <span>New processes</span><span>·</span>
-    </div>
+      <span>Architecture</span>      <span>User flows</span>      <span>Layouts</span>      <span>Components</span>      <span>Token system</span>      <span>Accessibility standards</span>      <span>Documentation</span>      <span>New processes</span>      <span>Architecture</span>      <span>User flows</span>      <span>Layouts</span>      <span>Components</span>      <span>Token system</span>      <span>Accessibility standards</span>      <span>Documentation</span>      <span>New processes</span>    </div>
   </div>
 </section>
 
@@ -924,7 +981,7 @@ section { padding: 140px 0; }
 </section>
 
 <!-- ═══ ROLE ═══ -->
-<section style="padding-top:0;">
+<section style="padding-top:60px;">
   <div class="container">
     <div class="role-banner reveal">
       <p class="role-text">I was assigned to build the mobile app to make the business mobile-first</p>
@@ -1004,17 +1061,6 @@ section { padding: 140px 0; }
   </div>
 </section>
 
-<!-- ═══ AFTER 3 MONTHS ═══ -->
-<section style="text-align:center;">
-  <div class="container">
-    <div class="section-label" style="justify-content:center;">Result</div>
-    <h2 class="section-title reveal" style="text-align:center;">After 3 months<br>of <span class="highlight">work</span></h2>
-    <div class="full-image reveal">
-      <img src="images/image 4.png" alt="App screens showcase">
-    </div>
-  </div>
-</section>
-
 <!-- ═══ OUTCOMES ═══ -->
 <section>
   <div class="container">
@@ -1043,6 +1089,9 @@ section { padding: 140px 0; }
             <div class="ttm-bar-track"><div class="ttm-bar-fill"></div></div>
           </div>
           <div class="ttm-note">Measured by comparing an average flow we built before (Withdrawal flow) against a flow built after the new system (MFA flow).</div>
+          <div class="ttm-flow-img">
+            <img src="images/image 9.png" alt="MFA flow">
+          </div>
         </div>
       </div>
     </div>
@@ -1072,7 +1121,7 @@ section { padding: 140px 0; }
         <span class="behind-link">Example</span>
       </div>
       <div class="behind-img">
-        <img src="images/image 7.png" alt="User flows">
+        <img src="images/user-flow.webp" alt="User flows">
       </div>
     </div>
 
@@ -1082,10 +1131,21 @@ section { padding: 140px 0; }
         <span class="behind-link">Example</span>
       </div>
       <div class="behind-img" style="margin-bottom:24px;">
-        <img src="images/image 8.png" alt="Layouts">
+        <img src="images/adding-wallet.webp" alt="Adding a new wallet — layouts">
       </div>
       <div class="behind-img">
-        <img src="images/image 9.png" alt="MFA flow">
+        <img src="images/withdrawal-flow.webp" alt="Withdrawal flow — layouts">
+      </div>
+    </div>
+
+    <div class="behind-item reveal">
+      <div class="behind-header">
+        <div class="behind-title"><span class="num">04</span> New components</div>
+        <span class="behind-link">Example</span>
+      </div>
+      <div class="behind-row">
+        <div class="behind-img"><img src="images/components-1.webp" alt="Components — example 1"></div>
+        <div class="behind-img"><img src="images/components-2.webp" alt="Components — example 2"></div>
       </div>
     </div>
   </div>
@@ -1164,7 +1224,7 @@ section { padding: 140px 0; }
 <!-- ═══ TESTIMONIALS ═══ -->
 <section>
   <div class="container">
-    <div class="section-label">Testimonials</div>
+    <div class="section-label">My team</div>
     <h2 class="section-title reveal">What the <span class="highlight">tech leads said</span></h2>
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
