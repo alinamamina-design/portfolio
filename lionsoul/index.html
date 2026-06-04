@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Lionsoul Global — Case Study</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -844,7 +844,7 @@ section { padding: 140px 0; }
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .container { padding: 0 24px; }
-  .nav { padding: 16px 24px; }
+  .nav { padding: calc(16px + env(safe-area-inset-top)) 24px 16px; }
   section { padding: 60px 0; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-image { height: auto; }
@@ -1089,9 +1089,6 @@ section { padding: 140px 0; }
             <div class="ttm-bar-track"><div class="ttm-bar-fill"></div></div>
           </div>
           <div class="ttm-note">Measured by comparing an average flow we built before (Withdrawal flow) against a flow built after the new system (MFA flow).</div>
-          <div class="ttm-flow-img">
-            <img src="images/image 9.png" alt="MFA flow">
-          </div>
         </div>
       </div>
     </div>
@@ -1133,8 +1130,11 @@ section { padding: 140px 0; }
       <div class="behind-img" style="margin-bottom:24px;">
         <img src="images/adding-wallet.webp" alt="Adding a new wallet — layouts">
       </div>
-      <div class="behind-img">
+      <div class="behind-img" style="margin-bottom:24px;">
         <img src="images/withdrawal-flow.webp" alt="Withdrawal flow — layouts">
+      </div>
+      <div class="behind-img">
+        <img src="images/mfa.webp" alt="MFA flow — layouts">
       </div>
     </div>
 
