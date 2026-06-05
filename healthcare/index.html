@@ -1,0 +1,1471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Health App for Older Adults — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #111113;
+  --border: rgba(255,255,255,0.08);
+  --accent: #D01648;
+  --accent-dim: rgba(208,22,72,0.15);
+  --text: #f0f0f0;
+  --text-80: rgba(240,240,240,0.8);
+  --text-50: rgba(240,240,240,0.5);
+  --text-30: rgba(240,240,240,0.3);
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', system-ui, sans-serif;
+  --red: #D94F4F;
+  --peach: #F4AC94;
+}
+
+html { scroll-behavior: smooth; }
+html { overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, video { max-width: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 48px;
+  background: rgba(10,10,10,0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--mono); font-size: 15px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); text-decoration: none;
+}
+.nav-links { display: flex; gap: 80px; list-style: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-links a {
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-50);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── Container ── */
+.container {
+  max-width: 1280px; margin: 0 auto; padding: 0 48px;
+}
+
+/* ── Section Label ── */
+.section-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.section-label::before { content: '//'; color: var(--text-30); }
+
+/* ── Section Title ── */
+.section-title {
+  font-family: var(--sans);
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.12;
+  margin-bottom: 40px; color: var(--text);
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.section-title .highlight { color: var(--accent); }
+.section-title.no-rule { border-bottom: none; padding-bottom: 0; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  padding: 128px 48px 50px;
+  position: relative; overflow: hidden; text-align: center;
+}
+.hero-bg {position:absolute;bottom:0;left:0;right:0;z-index:0}
+.hero-bg img {width:100%;height:auto;object-position:center;display:block}
+.hero-bg::after {content:'';position:absolute;inset:0;background:linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.7) 40%, rgba(10,10,10,0.2) 100%)}
+.hero-top-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--text-50);
+  margin-bottom: 24px; position: relative; z-index: 2;
+}
+.hero-title {
+  font-family: var(--sans); font-size: clamp(48px, 8vw, 72px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--text); margin-bottom: 24px;
+  position: relative; z-index: 2; text-align: center; max-width: 800px;
+}
+.hero-subtitle {
+  font-family: var(--sans); font-size: 18px; line-height: 28px;
+  color: var(--text-80); max-width: 600px;
+  margin-bottom: 120px; margin-top: 40px; position: relative; z-index: 2; text-align: center; margin-left: auto; margin-right: auto;
+}
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+  position: relative; z-index: 2; margin-bottom: 56px;
+}
+.hero-tag {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 8px 14px; border-radius: 100px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-80); line-height: 16px;
+}
+.bg-glow {
+  position: absolute; width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(208,22,72,0.06) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+}
+
+/* ── Lead text ── */
+.lead {
+  margin: 0; max-width: 800px; font-size: 18px; line-height: 28px;
+  color: var(--text-80);
+}
+.lead strong { font-weight: 600; color: var(--text); }
+
+/* ── Card frame ── */
+.card-frame {
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 40px; background: var(--surface);
+}
+
+/* ── Media ── */
+.media {
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; background: var(--surface);
+}
+.media img { width: 100%; height: auto; display: block; }
+.media.noborder { border: none; }
+.media.auto { padding: 24px; }
+
+figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+figcaption {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  color: var(--text-30); text-transform: uppercase; line-height: 16px;
+}
+
+/* ── Widget Collage ── */
+.widget-collage {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: min-content;
+  gap: 42px;
+  padding: 64px 48px;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+  background: radial-gradient(ellipse at center, rgba(208,22,72,0.06) 0%, transparent 70%);
+  border-radius: 24px;
+  position: relative;
+}
+.widget-collage::before {
+  content: 'WIDGETS';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--sans);
+  font-size: 220px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.05);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+.widget-collage img {
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: wc-float 4s ease-in-out infinite;
+}
+.widget-collage img:nth-child(1){animation-duration:3.8s;animation-delay:0s}
+.widget-collage img:nth-child(2){animation-duration:4.2s;animation-delay:0.3s}
+.widget-collage img:nth-child(3){animation-duration:3.5s;animation-delay:0.6s}
+.widget-collage img:nth-child(4){animation-duration:4.5s;animation-delay:0.1s}
+.widget-collage img:nth-child(5){animation-duration:3.6s;animation-delay:0.8s}
+.widget-collage img:nth-child(6){animation-duration:4.0s;animation-delay:0.4s}
+.widget-collage img:nth-child(7){animation-duration:3.9s;animation-delay:0.7s}
+.widget-collage img:nth-child(8){animation-duration:4.3s;animation-delay:0.2s}
+.widget-collage img:nth-child(9){animation-duration:3.7s;animation-delay:0.5s}
+.widget-collage img:nth-child(10){animation-duration:4.1s;animation-delay:0.9s}
+.widget-collage img:nth-child(11){animation-duration:3.4s;animation-delay:0.3s}
+.widget-collage img:nth-child(12){animation-duration:4.4s;animation-delay:0.6s}
+.widget-collage img:nth-child(13){animation-duration:3.8s;animation-delay:0.1s}
+.widget-collage img:nth-child(14){animation-duration:4.2s;animation-delay:0.8s}
+@keyframes wc-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+.marquee-label {
+  font-family: var(--sans);
+  font-size: 120px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.05);
+  margin: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ── V1 Screen Marquee ── */
+.v1-marquee-wrap {
+  width: 100vw; position: relative; left: 50%; margin-left: -50vw;
+  overflow: hidden; padding: 36px 0;
+  margin-bottom: 36px;
+}
+.v1-marquee {
+  display: flex; gap: 20px; width: max-content;
+  animation: v1scroll 30s linear infinite;
+  align-items: flex-start;
+}
+.v1-marquee img {
+  width: 240px; height: auto; border-radius: 20px;
+  border: none; flex-shrink: 0;
+}
+@keyframes v1scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.v1-marquee-reverse {
+  animation: v1scroll-reverse 30s linear infinite;
+}
+@keyframes v1scroll-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Stat cards ── */
+.stat-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+}
+.stat-card .mono-label {
+  margin: 0 0 4px; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-30); line-height: 16px;
+}
+.stat-card .big-num {
+  margin: 0; font-size: 32px; font-weight: 700; color: var(--accent);
+  line-height: 1.1; letter-spacing: -0.02em;
+}
+.stat-card .big-num.red { color: var(--red); }
+.stat-card .stat-title {
+  margin: 4px 0 0; font-size: 14px; font-weight: 500;
+  color: var(--text); line-height: 20px;
+}
+.stat-card .stat-sub {
+  margin: 4px 0 0; font-size: 14px; color: var(--text-50); line-height: 20px;
+}
+.stat-card a {
+  display: inline-block; margin-top: 8px; font-size: 11px;
+  color: var(--text-30); text-decoration: underline;
+}
+.stat-card a:hover { color: var(--accent); }
+
+/* ── Chart card ── */
+.chart-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+}
+.chart-card .mono-label {
+  margin: 0 0 12px; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-30); line-height: 16px;
+}
+.chart-card .chart-source {
+  margin: 8px 0 0; font-size: 11px; color: var(--text-30); line-height: 16px;
+}
+.chart-card .chart-source a {
+  color: var(--text-30); text-decoration: underline;
+}
+.chart-card .chart-source a:hover { color: var(--accent); }
+
+/* ── People visualization card ── */
+.people-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+}
+.people-card .mono-label {
+  margin: 0 0 16px; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-30); line-height: 16px;
+}
+.people-card .people-inner {
+  display: flex; align-items: center; gap: 16px;
+}
+.people-card .pill-row {
+  display: flex; gap: 3px;
+}
+.people-card .pill {
+  width: 18px; height: 40px; border-radius: 9px;
+}
+.people-card .pill.filled { background: var(--accent); }
+.people-card .pill.empty { background: rgba(255,255,255,0.08); }
+.people-card .people-text .big {
+  margin: 0; font-size: 24px; font-weight: 600;
+  color: var(--text); line-height: 1.1; letter-spacing: -0.02em;
+}
+.people-card .people-text .sub {
+  margin: 2px 0 0; font-size: 14px; color: var(--text-50); line-height: 20px;
+}
+.people-card .people-source {
+  margin: 16px 0 0; font-size: 11px; color: var(--text-30); line-height: 16px;
+}
+.people-card .people-source a {
+  color: var(--text-30); text-decoration: underline;
+}
+.people-card .people-source a:hover { color: var(--accent); }
+
+/* ── Feature list ── */
+.flist { display: flex; flex-direction: column; gap: 0; max-width: 800px; }
+.fitem {
+  display: flex; gap: 16px; padding: 20px 0;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.fitem:last-child { border-bottom: none; }
+.fnum {
+  font-family: var(--mono); font-weight: 500; font-size: 14px;
+  letter-spacing: 0.06em; color: var(--accent); line-height: 28px;
+  flex-shrink: 0; min-width: 28px;
+}
+.fitem h3 {
+  margin: 0; font-size: 18px; font-weight: 600;
+  color: var(--text); line-height: 28px;
+}
+.fitem p {
+  margin: 4px 0 0; font-size: 16px; line-height: 24px; color: var(--text-50);
+}
+
+/* ── Problem list (What Went Wrong) ── */
+.plist { display: flex; flex-direction: column; max-width: 800px; }
+.pitem { position: relative; padding: 14px 0 14px 28px; }
+.pitem::before {
+  content: ""; position: absolute; left: 0; top: 28px;
+  width: 14px; height: 1px; background: var(--accent);
+}
+.pitem h3 {
+  margin: 0; font-size: 24px; font-weight: 600;
+  letter-spacing: -0.01em; color: var(--text); line-height: 32px;
+}
+.pitem p {
+  margin: 6px 0 0; font-size: 16px; color: var(--text-50); line-height: 24px;
+}
+
+/* ── Before/After v3 ── */
+.ba-v3 { width: 100%; max-width: 900px; }
+.ba-v3-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  border-bottom: 1px solid var(--border); padding: 28px 0;
+}
+.ba-v3-row:last-child { border-bottom: none; }
+.ba-v3-head { padding: 0 0 16px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.ba-v3-h { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.ba-v3-h.muted { color: var(--text-30); }
+.ba-v3-h.acc { color: var(--accent); }
+.ba-v3-metric { font-size: 16px; color: var(--text-50); display: flex; align-items: center; }
+.ba-v3-before { font-size: 32px; font-weight: 600; color: var(--text-50); letter-spacing: -0.02em; }
+.ba-v3-after { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.ba-v3-after small { font-size: 14px; font-weight: 500; color: var(--accent); margin-left: 8px; }
+
+/* ── Before/After table (legacy) ── */
+.ba-table { width: 100%; border-collapse: collapse; max-width: 800px; }
+.ba-table th {
+  text-align: left; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-30); line-height: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--text-50);
+}
+.ba-table td {
+  font-size: 16px; line-height: 24px; padding: 12px 0;
+  border-bottom: 1px solid var(--border); color: var(--text-80);
+}
+.ba-table td:first-child { color: var(--text-50); font-size: 14px; }
+.ba-table td.before { color: var(--red); }
+.ba-table td.after { color: var(--accent); font-weight: 600; }
+
+/* ── Impact grid ── */
+.impact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.impact-card {
+  padding: 32px 24px; display: flex; flex-direction: column; gap: 6px;
+}
+.impact-card + .impact-card { border-left: 1px solid var(--border); padding-left: 24px; }
+.impact-card .num {
+  margin: 0; font-size: 56px; font-weight: 600;
+  line-height: 64px; letter-spacing: -0.02em; color: var(--accent);
+}
+.impact-card .lbl {
+  margin: 2px 0 0; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-30); line-height: 16px;
+}
+.impact-card .sub {
+  margin: 0; font-size: 15px; line-height: 22px; color: var(--text-50);
+}
+.impact-row + .impact-row { border-top: 1px solid var(--border); }
+
+/* ── Challenges grid (for section 04) ── */
+.challenges-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.challenge-card {
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 40px; background: var(--surface);
+  transition: border-color 0.3s;
+}
+.challenge-card:hover { border-color: var(--accent-dim); }
+.challenge-num {
+  font-family: var(--sans); font-size: 48px; font-weight: 700;
+  color: var(--accent); margin-bottom: 20px; line-height: 1;
+}
+.challenge-title {
+  font-size: 22px; font-weight: 600; line-height: 1.3;
+  margin-bottom: 12px; color: var(--text);
+}
+.challenge-desc {
+  font-size: 15px; color: var(--text-50); line-height: 1.6;
+}
+.challenge-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.challenge-list li {
+  font-size: 15px; color: var(--text-50); line-height: 1.5;
+  padding-left: 16px; position: relative;
+}
+.challenge-list li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── Theme Showcase ── */
+/* ── Theme Showcase ── */
+.theme-showcase {
+  padding: 96px 0;
+  background: radial-gradient(ellipse at center, rgba(232,48,96,0.06) 0%, transparent 60%);
+}
+.theme-showcase-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+.theme-showcase-title {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-80);
+  text-align: center;
+  font-style: italic;
+}
+.theme-phones {
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+  justify-content: center;
+}
+.theme-phone {
+  height: 640px;
+  width: auto;
+  border-radius: 24px;
+  filter: drop-shadow(0 24px 60px rgba(0,0,0,.5));
+}
+.theme-phone.center {
+  height: 640px;
+}
+.tp-float-1 { animation: tpFloat1 4s ease-in-out infinite; }
+.tp-float-2 { animation: tpFloat2 4.5s ease-in-out 0.3s infinite; }
+.tp-float-3 { animation: tpFloat3 3.8s ease-in-out 0.6s infinite; }
+@keyframes tpFloat1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes tpFloat2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes tpFloat3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.redesign-points {
+  display: flex; flex-direction: column; gap: 0;
+}
+.redesign-point {
+  display: flex; gap: 24px; align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.redesign-point:last-child { border-bottom: none; }
+.redesign-num {
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; min-width: 28px;
+}
+.redesign-text {
+  font-size: 18px; color: var(--text); line-height: 1.6;
+}
+
+/* ── Figure grid ── */
+.fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ── Section spacing ── */
+.case-section { padding: 100px 0; }
+.case-section.tight { padding: 64px 0; }
+.case-section.final-section { padding-bottom: 128px; }
+.section-content { display: flex; flex-direction: column; gap: 40px; }
+
+/* ── Redesign Phone Showcase (dark frame) ── */
+.rd-showcase { padding: 48px 0 96px; margin-bottom: 96px; background: radial-gradient(ellipse at center, rgba(255,160,60,0.05) 0%, transparent 60%); }
+.rd-showcase .rd-inner img { margin-bottom: 24px; }
+.rd-inner { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; align-items: flex-start; }
+.rd-col { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.rd-col:nth-child(1) img { animation: rdFloat1 4s ease-in-out infinite; }
+.rd-col:nth-child(2) img { animation: rdFloat2 4.5s ease-in-out 0.3s infinite; }
+.rd-col:nth-child(3) img { animation: rdFloat3 3.8s ease-in-out 0.6s infinite; }
+@keyframes rdFloat1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes rdFloat2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes rdFloat3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.rd-label {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-30);
+}
+.rd-phone {
+  width: 240px; min-height: 520px; background: #F2F1F6;
+  border-radius: 32px; overflow: hidden;
+  border: 3px solid #2a2a2e;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  position: relative; padding-bottom: 60px;
+}
+
+/* ====== Vision Simulation Section ====== */
+.vs-section { padding: 96px 0; background: linear-gradient(180deg, rgba(208,22,72,0.08) 0%, rgba(208,22,72,0.03) 100%); border-top: 1px solid rgba(208,22,72,0.15); border-bottom: 1px solid rgba(208,22,72,0.15); }
+.vs-section .section-label { color: var(--accent); }
+.vs-section .section-title { color: var(--text); }
+.vs-section .lead { color: var(--text-50); }
+.vs-section .lead strong { color: var(--text); }
+
+.vs-selector { display: flex; flex-direction: column; gap: 16px; align-items: center; margin: 0 0 36px; position: relative; }
+.vs-hand {
+  position: absolute;
+  top: 28px; right: calc(50% - 340px);
+  animation: handBounce 1.5s ease-in-out infinite;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+  z-index: 10;
+}
+@keyframes handBounce {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(-6px,6px); }
+}
+.vs-group { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.vs-group-label {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 1px; color: #636366;
+}
+.vs-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.vs-btn {
+  background: #2C2C2E; color: #AEAEB2; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  padding: 8px 16px; border-radius: 24px; transition: all .2s; white-space: nowrap;
+}
+.vs-btn:hover { background: #3A3A3C; color: #D1D1D6; }
+.vs-btn.active { background: var(--accent); color: #fff; font-weight: 600; }
+
+.vs-phone-wrap {
+  display: flex; justify-content: center; gap: 16px;
+  flex-wrap: wrap; margin: 0 0 28px; position: relative;
+}
+.vs-phone-col { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; }
+.vs-screen-name {
+  font-family: var(--mono); font-size: 11px; color: #636366;
+  font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.vs-phone {
+  width: 240px; min-height: 520px; background: #F2F1F6;
+  border-radius: 32px; overflow: hidden;
+  box-shadow: 0 16px 60px rgba(0,0,0,.3);
+  position: relative; padding-bottom: 60px; transition: filter .4s ease;
+}
+.vs-phone-overlay {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 32px; pointer-events: none; z-index: 10;
+  opacity: 0; transition: opacity .4s ease;
+}
+.vs-condition-glaucoma .vs-phone-overlay.vs-glaucoma-ol { opacity: 1; }
+.vs-condition-macular .vs-phone-overlay.vs-macular-ol { opacity: 1; }
+.vs-glaucoma-ol { background: radial-gradient(ellipse 45% 45% at center, transparent 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.7) 60%, rgba(0,0,0,.95) 80%, #000 100%); }
+.vs-macular-ol { background: radial-gradient(ellipse 28% 28% at center, rgba(0,0,0,.85) 0%, rgba(0,0,0,.5) 40%, rgba(0,0,0,.15) 60%, transparent 75%); backdrop-filter: blur(1px); }
+
+.vs-condition-protanopia .vs-phone { filter: url(#vs-protanopia); }
+.vs-condition-deuteranopia .vs-phone { filter: url(#vs-deuteranopia); }
+.vs-condition-tritanopia .vs-phone { filter: url(#vs-tritanopia); }
+.vs-condition-achromatopsia .vs-phone { filter: url(#vs-achromatopsia); }
+.vs-condition-cataract .vs-phone { filter: sepia(35%) saturate(70%) contrast(85%) brightness(105%) blur(0.4px); }
+.vs-condition-blurred .vs-phone { filter: blur(1.2px); }
+.vs-condition-contrast .vs-phone { filter: contrast(55%) brightness(110%); }
+.vs-condition-bright .vs-phone { filter: brightness(170%) contrast(65%) saturate(70%); }
+
+.vs-anno { max-width: 600px; margin: 0 auto; }
+.vs-anno-card { background: rgba(208,22,72,0.15); border: 1px solid rgba(208,22,72,0.25); border-radius: 14px; padding: 20px 24px; transition: opacity .3s; }
+.vs-anno-title { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+.vs-anno-desc { font-size: 14px; color: #8E8E93; line-height: 21px; }
+
+/* Phone internals */
+.vs-sbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px 0; font-size: 11px; font-weight: 600; color: #1C1C1E; }
+.vs-sbar-icons { display: flex; gap: 4px; align-items: center; }
+.vs-sbar-icons svg { width: 13px; height: 13px; }
+.vs-island { display: none; }
+.vs-cnt { padding: 4px 12px 14px; display: flex; flex-direction: column; gap: 9px; }
+.vs-hdr { display: flex; justify-content: space-between; align-items: flex-end; padding: 4px 0 2px; }
+.vs-hdr h3 { font-size: 22px; font-weight: 700; color: #1C1C1E; letter-spacing: -.3px; line-height: 1; margin: 0; }
+.vs-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0 10px; }
+.vs-row-label { font-size: 13px; font-weight: 700; color: #1C1C1E; letter-spacing: -.1px; padding: 2px 0 0; }
+.vs-tasks { background: #fff; border-radius: 13px; padding: 3px 10px; display: flex; flex-direction: column; }
+.vs-task { display: flex; align-items: center; gap: 7px; padding: 8px 0; }
+.vs-task+.vs-task { border-top: 1px solid #E5E5EA; }
+.vs-task-info { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.vs-task-text { font-size: 11px; font-weight: 500; color: #1C1C1E; line-height: 14px; }
+.vs-task-sub { font-size: 10px; color: #6E6E73; line-height: 13px; }
+.vs-task.completed .vs-task-text { color: #767679; text-decoration: line-through; }
+.vs-task.completed .vs-task-sub { color: #767679; }
+.vs-tbtn { margin-left: auto; font-size: 10px; font-weight: 600; flex-shrink: 0; padding: 5px 12px; border-radius: 14px; border: none; cursor: default; min-height: 26px; display: flex; align-items: center; }
+.vs-tbtn.done { background: linear-gradient(135deg, #D01648, #D43A64); color: white; }
+.vs-tbtn.log { background: transparent; color: #D01648; border: 1.5px solid #D01648; }
+.vs-tbtn.disabled { background: #E5E5EA; color: #767679; }
+.vs-mlink { font-size: 10px; font-weight: 600; color: #D01648; text-decoration: none; }
+.vs-insight { background: #fff; border-radius: 11px; display: flex; }
+.vs-insight-body { padding: 10px; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.vs-insight-row { display: flex; align-items: center; gap: 5px; }
+.vs-insight-icon { width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.vs-insight-label { font-size: 10px; font-weight: 600; line-height: 1; }
+.vs-insight-time { font-size: 10px; color: #6E6E73; margin-left: auto; }
+.vs-insight-val { font-size: 18px; font-weight: 800; color: #1C1C1E; letter-spacing: -.3px; }
+.vs-insight-desc { font-size: 10px; color: #3A3A3C; line-height: 13px; }
+.vs-tab-area { position: absolute; bottom: 0; left: 0; right: 0; height: 60px; display: flex; align-items: flex-end; justify-content: center; padding: 0 10px 12px; gap: 6px; border-radius: 0 0 32px 32px; }
+.vs-tab-bar { flex: 1; height: 42px; background: #fff; border-radius: 12px; display: flex; justify-content: space-evenly; align-items: stretch; padding: 3px; box-shadow: 0 2px 12px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.03); }
+.vs-tab { display: flex; flex-direction: column; align-items: center; gap: 1px; background: none; border: none; cursor: default; flex: 1; border-radius: 9px; justify-content: center; }
+.vs-tab.active { background: rgba(208,22,72,.08); }
+.vs-tab svg { width: 15px; height: 15px; stroke: #767679; fill: none; stroke-width: 1.8; }
+.vs-tab.active svg { stroke: #D01648; }
+.vs-tab span { font-size: 9px; font-weight: 500; color: #767679; margin-top: 1px; }
+.vs-tab.active span { color: #D01648; font-weight: 600; }
+.vs-fab { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #D01648, #D43A64); border: none; cursor: default; display: flex; align-items: center; justify-content: center; box-shadow: none; flex-shrink: 0; margin-bottom: 3px; }
+.vs-fab svg { width: 15px; height: 15px; stroke: #fff; stroke-width: 2.4; fill: none; }
+
+/* Vitals phone internals */
+.vs-vgroup { background: #fff; border-radius: 13px; overflow: hidden; }
+.vs-vgroup-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 10px 0; }
+.vs-vgroup-title { font-size: 10px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
+.vs-vgroup-arrow { font-size: 16px; color: #767679; line-height: 1; }
+.vs-vgroup-body { padding: 2px 10px 10px; }
+.vs-ring-row { display: flex; align-items: center; gap: 10px; }
+.vs-ring-info { display: flex; flex-direction: column; gap: 1px; }
+.vs-ring-val { font-size: 20px; font-weight: 800; color: #1C1C1E; letter-spacing: -.3px; }
+.vs-ring-sub { font-size: 10px; color: #6E6E73; }
+.vs-tip { border-radius: 8px; padding: 6px 10px; margin-top: 4px; }
+.vs-tip span { font-size: 10px; font-weight: 500; color: #3A3A3C; line-height: 12px; display: block; }
+.vs-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vs-mini-val { font-size: 20px; font-weight: 700; color: #1C1C1E; letter-spacing: -.3px; }
+.vs-mini-unit { font-size: 10px; font-weight: 500; color: #6E6E73; }
+.vs-mini-sub { font-size: 10px; color: #6E6E73; margin-top: 1px; }
+
+/* ── Responsive ── */
+
+/* ── Burger ── */
+.nav-burger {
+  display: none;
+  width: 40px; height: 40px;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  background: none; border: 0; cursor: pointer; padding: 0;
+}
+.nav-burger span {
+  display: block; width: 20px; height: 1.5px;
+  background: var(--text-80); border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+body.menu-open .nav-burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
+body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile base (WASD principles) ── */
+@media (max-width: 900px) {
+  .container { padding: 0 24px; }
+  .nav { padding: calc(16px + env(safe-area-inset-top)) 24px 16px; flex-wrap: wrap; }
+  .nav-burger { display: flex; }
+  .nav-links {
+    position: static; left: auto; transform: none;
+    flex-basis: 100%; min-width: 100%;
+    flex-direction: column; gap: 0;
+    background: transparent;
+    border-bottom: 0;
+    padding: 0;
+    max-height: 0; overflow: hidden;
+    opacity: 0; pointer-events: none;
+    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+  }
+  body.menu-open .nav-links { max-height: 80vh; opacity: 1; pointer-events: auto; padding: 8px 0 16px; }
+  .nav-links a { display: block; font-family: var(--sans); font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; text-transform: none; color: #fff; padding: 18px 0; }
+
+  .case-section { padding: 60px 0; }
+  .case-section.final-section { padding-bottom: 80px; }
+  .theme-showcase { padding: 60px 0; }
+  .hero { min-height: auto; padding: 160px 0 0; }
+  .hero-title { font-size: clamp(40px, 11vw, 56px); line-height: 1.05; padding: 0 24px; margin-bottom: 0; }
+  .hero-subtitle { font-size: 17px; line-height: 27px; margin: 12px auto 48px; padding: 0 24px; }
+  .hero-bg { position: relative; bottom: auto; left: auto; right: auto; order: 3; width: auto; margin: 0 24px; border-radius: 16px; overflow: hidden; }
+  .hero-bg::after { display: none; }
+  .bg-glow { width: 380px; height: 380px; }
+  .section-title { font-size: 36px; line-height: 42px; letter-spacing: -0.02em; margin-bottom: 32px; }
+  .lead { font-size: 17px; line-height: 27px; }
+  .card-frame { padding: 24px; border-radius: 16px; }
+  .challenge-card { padding: 24px; border-radius: 16px; }
+  .stat-grid, .challenges-grid, .impact-grid { grid-template-columns: 1fr; }
+  .fig-grid { grid-template-columns: 1fr; gap: 40px; }
+  .impact-card { padding: 20px 0; }
+  .impact-card + .impact-card { border-left: 0; border-top: 1px solid var(--border); padding-left: 0; }
+  .ba-v3-metric { font-size: 14px; }
+  .ba-v3-before, .ba-v3-after { font-size: 22px; }
+  .ba-v3-after small { font-size: 11px; margin-left: 6px; }
+  .widget-collage { display: none; }
+  .marquee-label { font-size: clamp(64px, 22vw, 120px); line-height: 0.95; margin-top: 80px; }
+  .v1-marquee-wrap + .marquee-label { margin-top: 0; }
+  .v1-marquee-wrap { padding: 16px 0; margin-bottom: 16px; }
+  .v1-marquee img { width: 180px; border-radius: 14px; }
+  .theme-phone { display: none; }
+  .theme-phone.center { display: block; height: auto; width: min(72%, 300px); min-width: 0; }
+  .rd-showcase { display: none; }
+  .vs-phone-col:nth-child(2), .vs-phone-col:nth-child(3) { display: none; }
+  .vs-hand { display: none; }
+  .vs-section { padding: 60px 0; }
+}
+
+/* ── Tablet ── */
+@media (min-width: 600px) and (max-width: 899px) {
+  .hero-title { font-size: clamp(48px, 9vw, 72px); }
+  .section-title { font-size: clamp(36px, 6vw, 48px); line-height: 1.12; }
+  .lead { font-size: 17px; line-height: 27px; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .challenges-grid { grid-template-columns: 1fr 1fr; }
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .impact-card { padding: 24px 20px 20px 0; }
+  .impact-card + .impact-card { border-top: 0; border-left: 1px solid var(--border); padding-left: 20px; }
+  .ba-v3-before, .ba-v3-after { font-size: 28px; }
+  .v1-marquee img { width: 210px; }
+}
+
+/* ── Small phones ── */
+@media (max-width: 600px) {
+  .hero-title { font-size: clamp(36px, 12vw, 44px); }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Filters for Vision Simulation -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="vs-protanopia"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
+    <filter id="vs-deuteranopia"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
+    <filter id="vs-tritanopia"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/></filter>
+    <filter id="vs-achromatopsia"><feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0"/></filter>
+  </defs>
+</svg>
+
+<!-- ── Nav ── -->
+<nav class="nav">
+  <a class="nav-logo" href="#">Alina Mamina</a>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false"
+    onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'));">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"><img src="images/hero-matt.webp" alt="An older couple walking together"></div>
+  <h1 class="hero-title"><span style="color:var(--accent)">Health app</span> for older adults</h1>
+  <p class="hero-subtitle">An app for health monitoring designed specifically for older adults. Developed by a small team of enthusiasts.</p>
+</section>
+
+<!-- ═══ 00 — PROBLEM ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">00</span></div>
+    <h2 class="section-title">Research</h2>
+    <div class="section-content">
+      <p class="lead">As of 2024, about <strong>10% of the world's population, around 800 million people, are aged 65 or older</strong>. By 2050, that number will more than double to 1.6 billion, meaning 1 in 6 people on the planet will be over 65. In Europe and North America, nearly <strong>3 out of 4</strong> older adults already live alone or with a partner only.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <p class="mono-label">As of 2024</p>
+          <p class="big-num red">~800M</p>
+          <p class="stat-title">people aged 65+ worldwide</p>
+          <p class="stat-sub">10.3% of the global population</p>
+          <a href="https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/undesa_pd_2024_wpp_2024_advance_unedited_0.pdf" target="_blank" rel="noopener">WPP 2024, UN&nbsp;DESA</a>
+        </div>
+        <div class="stat-card">
+          <p class="mono-label">By 2050</p>
+          <p class="big-num red">1.6B</p>
+          <p class="stat-title">more than double</p>
+          <p class="stat-sub">1 in 6 people on the planet</p>
+          <a href="https://desapublications.un.org/publications/world-social-report-2023-leaving-no-one-behind-ageing-world" target="_blank" rel="noopener">World Social Report 2023, UN&nbsp;DESA</a>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <p class="mono-label">Growth trajectory</p>
+        <div style="position:relative;width:100%;height:220px;">
+          <canvas id="growthChart"></canvas>
+        </div>
+        <p class="chart-source">2021 &amp; 2050: <a href="https://desapublications.un.org/publications/world-social-report-2023-leaving-no-one-behind-ageing-world" target="_blank" rel="noopener">World Social Report 2023</a> &middot; 2024: <a href="https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/undesa_pd_2024_wpp_2024_advance_unedited_0.pdf" target="_blank" rel="noopener">WPP 2024</a> &middot; 2030, 2040: interpolated</p>
+      </div>
+
+      <div class="people-card">
+        <p class="mono-label">Europe &amp; North America</p>
+        <div class="people-inner">
+          <div class="pill-row">
+            <div class="pill filled"></div>
+            <div class="pill filled"></div>
+            <div class="pill filled"></div>
+            <div class="pill empty"></div>
+          </div>
+          <div class="people-text">
+            <p class="big">3 out of 4</p>
+            <p class="sub">older adults live alone or with partner only</p>
+          </div>
+        </div>
+        <p class="people-source"><a href="https://www.un.org/development/desa/pd/data/living-arrangements-older-persons" target="_blank" rel="noopener">UN Database on Households and Living Arrangements of Older Persons 2022</a> &middot; <a href="https://www.un.org/en/desa/navigating-later-years-global-look-gender-and-living-arrangements-older-persons" target="_blank" rel="noopener">Navigating the later years, Nov 2023</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 01 — IDEATION ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">01</span></div>
+    <h2 class="section-title">Ideation</h2>
+    <div class="section-content">
+      <div class="fig-grid">
+        <figure>
+          <img src="images/mindmap.webp" alt="Mind map: Problems of Older Adults Living Alone" style="width:100%;height:auto;display:block;border-radius:8px;" loading="lazy" decoding="async">
+          <figcaption>Brainstorming in FigJam: exploring the problem space</figcaption>
+          <p class="lead" style="margin-top:16px;">Before jumping into screens, I mapped out the full problem space to understand what older adults living alone actually struggle with, and where a digital product could make the biggest difference.</p>
+        </figure>
+        <figure>
+          <img src="images/impact-effort.webp" alt="Impact vs Effort matrix showing feature prioritization" style="width:100%;height:auto;display:block;border-radius:8px;" loading="lazy" decoding="async">
+          <figcaption>Feature prioritization: Impact vs Effort matrix in FigJam</figcaption>
+          <p class="lead" style="margin-top:16px;">From 25+ ideas, I used an Impact vs Effort matrix to identify which features belong in the MVP, focusing on what delivers the most value with the least development cost.</p>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 — SOLUTION ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">02</span></div>
+    <h2 class="section-title">Solution</h2>
+    <div class="section-content">
+      <p class="lead">A mobile app that makes daily health monitoring effortless for older adults and transparent for their families. It connects to wearable devices, automatically collects key metrics, and sends data to relatives and doctors.</p>
+
+      <h3 style="margin:0;padding-top:20px;font-size:24px;font-weight:600;letter-spacing:-0.01em;color:var(--text);line-height:32px;">Top Features</h3>
+
+      <div class="flist">
+        <div class="fitem">
+          <span class="fnum">01</span>
+          <div>
+            <h3>Trend Tracking</h3>
+            <p>Key vitals at a glance, in plain language, not raw numbers. Weekly and monthly charts to spot patterns early.</p>
+          </div>
+        </div>
+        <div class="fitem">
+          <span class="fnum">02</span>
+          <div>
+            <h3>Medication Reminders</h3>
+            <p>One-tap confirmation on phone or watch. Missed dose? The family gets notified.</p>
+          </div>
+        </div>
+        <div class="fitem">
+          <span class="fnum">03</span>
+          <div>
+            <h3>Family Monitoring</h3>
+            <p>A linked dashboard for relatives: vitals, meds, activity. Automatic alerts when something looks off.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 — VERSION 1 ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">03</span></div>
+    <h2 class="section-title">Version 1</h2>
+    <div class="section-content">
+      <p class="lead">For the first version, I developed a feature-rich interface with a wide range of functionality.</p>
+
+      <figure>
+        <div class="media auto" style="padding:0;border:none;">
+          <img src="images/wireframes.webp" alt="Early wireframes sketched on a green chalkboard — Calendar, Main page, Account, and Devices screens" loading="lazy" decoding="async">
+        </div>
+        <figcaption>Early wireframes: mapping out the core screens</figcaption>
+      </figure>
+
+      <div class="widget-collage">
+        <img src="images/widgets/Card-7.png" alt="Pressure card" style="grid-area:1/2/2/4;" loading="lazy" decoding="async">
+        <img src="images/widgets/Mark.png" alt="Heartbeat mark" style="grid-area:1/4/2/5;width:55%;justify-self:center;align-self:start;margin-top:-20px;" loading="lazy" decoding="async">
+        <img src="images/widgets/Card-6.webp" alt="Useful Exercises" style="grid-area:1/4/3/5;align-self:end;" loading="lazy" decoding="async">
+        <img src="images/widgets/Header.png" alt="Health header" style="grid-area:1/5/2/7;" loading="lazy" decoding="async">
+        <img src="images/widgets/Card-2.png" alt="Blood glucose card" style="grid-area:2/1/3/3;" loading="lazy" decoding="async">
+        <img src="images/widgets/Card-5.png" alt="Camera device" style="grid-area:2/5/3/6;" loading="lazy" decoding="async">
+        <img src="images/widgets/Weekly%20goal.png" alt="Weekly goal" style="grid-area:2/6/3/7;" loading="lazy" decoding="async">
+        <img src="images/widgets/Story.png" alt="Healthy food story" style="grid-area:3/3/4/4;" loading="lazy" decoding="async">
+        <img src="images/widgets/Bottom.png" alt="Tab bar" style="grid-area:3/1/4/3;" loading="lazy" decoding="async">
+        <img src="images/widgets/Frame%20149286273.png" alt="Toggles" style="grid-area:4/1/5/2;width:55%;justify-self:center;" loading="lazy" decoding="async">
+        <img src="images/widgets/Card-3.png" alt="Pulse card" style="grid-area:4/3/5/5;margin-top:-70px;" loading="lazy" decoding="async">
+        <img src="images/widgets/Card.png" alt="Sleep card" style="grid-area:3/5/4/7;margin-top:76px;" loading="lazy" decoding="async">
+        <img src="images/widgets/Widget.png" alt="Steps widget" style="grid-area:5/2/6/4;width:55%;justify-self:center;margin-top:-40px;" loading="lazy" decoding="async">
+        <img src="images/widgets/Card-4.png" alt="Weight card" style="grid-area:5/4/6/6;margin-top:-40px;" loading="lazy" decoding="async">
+      </div>
+
+      <p class="marquee-label">Light mode</p>
+      <div class="v1-marquee-wrap">
+        <div class="v1-marquee">
+          <img src="images/screens/Main%201.webp" alt="Main screen" loading="lazy" decoding="async">
+          <img src="images/screens/Calendar%201.webp" alt="Calendar screen" loading="lazy" decoding="async">
+          <img src="images/screens/Pressure%202.webp" alt="Pressure screen" loading="lazy" decoding="async">
+          <img src="images/screens/Sleep%202.webp" alt="Sleep screen" loading="lazy" decoding="async">
+          <img src="images/screens/Steps%202.webp" alt="Steps screen" loading="lazy" decoding="async">
+          <img src="images/screens/Weight%202.webp" alt="Weight screen" loading="lazy" decoding="async">
+          <img src="images/screens/Devices%201.webp" alt="Devices screen" loading="lazy" decoding="async">
+          <img src="images/screens/Account%201.webp" alt="Account screen" loading="lazy" decoding="async">
+          <img src="images/screens/Main%201.webp" alt="Main screen" loading="lazy" decoding="async">
+          <img src="images/screens/Calendar%201.webp" alt="Calendar screen" loading="lazy" decoding="async">
+          <img src="images/screens/Pressure%202.webp" alt="Pressure screen" loading="lazy" decoding="async">
+          <img src="images/screens/Sleep%202.webp" alt="Sleep screen" loading="lazy" decoding="async">
+          <img src="images/screens/Steps%202.webp" alt="Steps screen" loading="lazy" decoding="async">
+          <img src="images/screens/Weight%202.webp" alt="Weight screen" loading="lazy" decoding="async">
+          <img src="images/screens/Devices%201.webp" alt="Devices screen" loading="lazy" decoding="async">
+          <img src="images/screens/Account%201.webp" alt="Account screen" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <p class="marquee-label">Dark mode</p>
+      <div class="v1-marquee-wrap">
+        <div class="v1-marquee v1-marquee-reverse">
+          <img src="images/screens/Main.webp" alt="Main dark" loading="lazy" decoding="async">
+          <img src="images/screens/Calendar.webp" alt="Calendar dark" loading="lazy" decoding="async">
+          <img src="images/screens/Devices.webp" alt="Devices dark" loading="lazy" decoding="async">
+          <img src="images/screens/Account.webp" alt="Account dark" loading="lazy" decoding="async">
+          <img src="images/screens/Steps.webp" alt="Steps dark" loading="lazy" decoding="async">
+          <img src="images/screens/Steps-1.webp" alt="Steps detail dark" loading="lazy" decoding="async">
+          <img src="images/screens/Sleep.webp" alt="Sleep dark" loading="lazy" decoding="async">
+          <img src="images/screens/Main.webp" alt="Main dark" loading="lazy" decoding="async">
+          <img src="images/screens/Calendar.webp" alt="Calendar dark" loading="lazy" decoding="async">
+          <img src="images/screens/Devices.webp" alt="Devices dark" loading="lazy" decoding="async">
+          <img src="images/screens/Account.webp" alt="Account dark" loading="lazy" decoding="async">
+          <img src="images/screens/Steps.webp" alt="Steps dark" loading="lazy" decoding="async">
+          <img src="images/screens/Steps-1.webp" alt="Steps detail dark" loading="lazy" decoding="async">
+          <img src="images/screens/Sleep.webp" alt="Sleep dark" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 — WHAT WENT WRONG ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">04</span></div>
+    <h2 class="section-title">What Went Wrong</h2>
+    <div class="section-content">
+      <p class="lead">Moderated usability testing with 12 participants from the target audience revealed critical problems:</p>
+
+      <div class="challenges-grid">
+        <div class="challenge-card">
+          <div class="challenge-num">01</div>
+          <div class="challenge-title">Low accessibility</div>
+          <ul class="challenge-list">
+            <li>Text contrast only 2.4:1 (WCAG AA requires 4.5:1)</li>
+            <li>Touch targets at 32px, too small for older users</li>
+            <li>Icon-only navigation, users couldn't tell what each tab meant</li>
+          </ul>
+        </div>
+        <div class="challenge-card">
+          <div class="challenge-num">02</div>
+          <div class="challenge-title">Information overload</div>
+          <div class="challenge-desc">The main screen was overloaded with information. Users couldn't tell what needed attention and what was just background data.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 — THE REDESIGN ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">05</span></div>
+    <h2 class="section-title">Version 2</h2>
+    <div class="section-content">
+      <p class="lead">I rethought the entire app and focused on what <strong>actually matters to users</strong>:</p>
+
+      <div class="redesign-points">
+        <div class="redesign-point">
+          <div class="redesign-num">01</div>
+          <div class="redesign-text">The main screen shows only the essential widgets, reminders and notifications about important health changes</div>
+        </div>
+        <div class="redesign-point">
+          <div class="redesign-num">02</div>
+          <div class="redesign-text">The second screen focuses on the most important health trends</div>
+        </div>
+        <div class="redesign-point">
+          <div class="redesign-num">03</div>
+          <div class="redesign-text">The entire UI was rebuilt following WCAG AAA guidelines</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Redesign phone showcase -->
+<div class="rd-showcase">
+  <div class="container">
+    <div class="rd-inner">
+
+      <!-- TODAY -->
+      <div class="rd-col">
+        <span class="rd-label">Today</span>
+        <img src="images/today-light2.webp" alt="Today" style="height:580px;width:auto;border-radius:24px;filter:drop-shadow(0 20px 50px rgba(0,0,0,.3));" loading="lazy" decoding="async">
+      </div>
+
+      <!-- VITALS -->
+      <div class="rd-col">
+        <span class="rd-label">Vitals</span>
+        <img src="images/vitals-light2.webp" alt="Vitals" style="height:580px;width:auto;border-radius:24px;filter:drop-shadow(0 20px 50px rgba(0,0,0,.3));" loading="lazy" decoding="async">
+      </div>
+
+      <!-- CIRCLE -->
+      <div class="rd-col">
+        <span class="rd-label">Circle</span>
+        <img src="images/circle-light2.webp" alt="Circle" style="height:580px;width:auto;border-radius:24px;filter:drop-shadow(0 20px 50px rgba(0,0,0,.3));" loading="lazy" decoding="async">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ 06 — VISION TESTING ═══ -->
+<section class="case-section vs-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">06</span></div>
+    <h2 class="section-title">Vision Testing</h2>
+    <div class="section-content">
+      <p class="lead">Older adults often experience <strong>multiple vision impairments simultaneously</strong>. I tested the redesigned interface against 11 eye conditions, from color blindness to macular degeneration, to ensure the app remains usable for the widest possible audience.</p>
+
+      <!-- Condition Selector -->
+      <div class="vs-selector" style="position:relative">
+        <img class="vs-hand" src="images/cursor.png" alt="click" style="width:48px;height:auto;" loading="lazy" decoding="async">
+        <div class="vs-group">
+          <span class="vs-group-label">Color blind</span>
+          <div class="vs-btns">
+            <button class="vs-btn active" data-vs="normal">Normal</button>
+            <button class="vs-btn" data-vs="protanopia">Protanopia</button>
+            <button class="vs-btn" data-vs="deuteranopia">Deuteranopia</button>
+            <button class="vs-btn" data-vs="tritanopia">Tritanopia</button>
+            <button class="vs-btn" data-vs="achromatopsia">Achromatopsia</button>
+          </div>
+        </div>
+        <div class="vs-group">
+          <span class="vs-group-label">Other conditions</span>
+          <div class="vs-btns">
+            <button class="vs-btn" data-vs="cataract">Cataract</button>
+            <button class="vs-btn" data-vs="blurred">Blurred vision</button>
+            <button class="vs-btn" data-vs="glaucoma">Glaucoma</button>
+            <button class="vs-btn" data-vs="macular">Macular degeneration</button>
+            <button class="vs-btn" data-vs="contrast">Loss of contrast</button>
+            <button class="vs-btn" data-vs="bright">Bright light</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Mockups -->
+      <div class="vs-phone-wrap" id="vsPhoneRow">
+
+        <!-- TODAY -->
+        <div class="vs-phone-col">
+          <span class="vs-screen-name">Today</span>
+          <div class="vs-phone">
+            <div class="vs-sbar"><span>9:41</span><div class="vs-sbar-icons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6.9c4-4.5 17-4.5 21 0"/><path d="M5 10.5c3-3.5 11-3.5 14 0"/><path d="M8.5 14c2.1-2.5 6-2.5 8 0"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg></div></div>
+            <div class="vs-island"></div>
+            <div class="vs-cnt">
+              <div class="vs-hdr"><h3>Hello, Marta</h3></div>
+              <div class="vs-row"><div class="vs-row-label">To do today</div><a href="#" class="vs-mlink">Schedule</a></div>
+              <div class="vs-tasks">
+                <div class="vs-task"><div class="vs-task-info"><span class="vs-task-text">Measure blood pressure</span><span class="vs-task-sub">Morning routine</span></div><button class="vs-tbtn log">Log</button></div>
+                <div class="vs-task completed"><div class="vs-task-info"><span class="vs-task-text">Take medication</span><span class="vs-task-sub">Done at 14:05</span></div><button class="vs-tbtn disabled">Done</button></div>
+                <div class="vs-task"><div class="vs-task-info"><span class="vs-task-text">Face-to-face consultation</span><span class="vs-task-sub">Dra. García · 16:30</span></div><button class="vs-tbtn done">Done</button></div>
+              </div>
+              <div class="vs-row" style="padding-top:2px;"><div class="vs-row-label">Insights</div></div>
+              <div class="vs-insight" style="border-left:2px solid #D54215;flex-direction:column;">
+                <div class="vs-insight-body">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <div style="width:20px;height:20px;border-radius:5px;background:#FBE9E7;display:flex;align-items:center;justify-content:center;">
+                      <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#D54215" stroke-width="2.2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+                    </div>
+                    <span style="font-size:9px;font-weight:600;color:#D54215;">Pulse alert</span>
+                    <span style="font-size:9px;color:#6E6E73;margin-left:auto;">20 min ago</span>
+                  </div>
+                  <span class="vs-insight-val">128 bpm</span>
+                  <span class="vs-insight-desc">Higher than your usual 68–75 range</span>
+                </div>
+              </div>
+              <div class="vs-insight">
+                <div class="vs-insight-body">
+                  <div class="vs-insight-row">
+                    <div class="vs-insight-icon" style="background:rgba(28,136,56,.1);"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#1C8838" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                    <span class="vs-insight-label" style="color:#1C8838;">Activity</span>
+                  </div>
+                  <span class="vs-insight-val">3,732 to go</span>
+                  <span class="vs-insight-desc">4,268 of 8,000 steps walked today</span>
+                </div>
+              </div>
+            </div>
+            <div class="vs-tab-area"><div class="vs-tab-bar">
+              <button class="vs-tab active"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg><span>Today</span></button>
+              <button class="vs-tab"><svg viewBox="0 0 24 24" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Vitals</span></button>
+              <button class="vs-tab"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Circle</span></button>
+            </div><button class="vs-fab"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+          </div>
+          <div class="vs-phone-overlay vs-glaucoma-ol"></div>
+          <div class="vs-phone-overlay vs-macular-ol"></div>
+        </div>
+
+        <!-- VITALS -->
+        <div class="vs-phone-col">
+          <span class="vs-screen-name">Vitals</span>
+          <div class="vs-phone">
+            <div class="vs-sbar"><span>9:41</span><div class="vs-sbar-icons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6.9c4-4.5 17-4.5 21 0"/><path d="M5 10.5c3-3.5 11-3.5 14 0"/><path d="M8.5 14c2.1-2.5 6-2.5 8 0"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg></div></div>
+            <div class="vs-island"></div>
+            <div class="vs-cnt">
+              <div class="vs-hdr"><h3>Your vitals</h3></div>
+              <div class="vs-vgroup">
+                <div class="vs-vgroup-header"><span class="vs-vgroup-title" style="color:#5856D6;">Sleep</span><span class="vs-vgroup-arrow">›</span></div>
+                <div class="vs-vgroup-body" style="padding:6px 10px 10px;display:flex;flex-direction:column;gap:8px;">
+                  <div class="vs-ring-row">
+                    <div style="position:relative;width:36px;height:36px;flex-shrink:0;">
+                      <svg viewBox="0 0 52 52" style="width:36px;height:36px;transform:rotate(-90deg);"><circle cx="26" cy="26" r="21" fill="none" stroke="#E5E5EA" stroke-width="5"/><circle cx="26" cy="26" r="21" fill="none" stroke="#5856D6" stroke-width="5" stroke-linecap="round" stroke-dasharray="116 131.95"/></svg>
+                      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#5856D6" stroke-width="2.2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+                    </div>
+                    <div class="vs-ring-info"><span class="vs-ring-val">7h 05m</span><span class="vs-ring-sub">23:10 — 06:15</span></div>
+                  </div>
+                  <div class="vs-tip" style="background:linear-gradient(135deg,rgba(88,86,214,.06),rgba(139,133,247,.06));"><span>You slept 40 min later than usual. Try winding down by 22:30.</span></div>
+                </div>
+              </div>
+              <div class="vs-vgroup">
+                <div class="vs-vgroup-header"><span class="vs-vgroup-title" style="color:#1C8838;">Activity</span><span class="vs-vgroup-arrow">›</span></div>
+                <div class="vs-vgroup-body" style="padding:6px 10px 10px;display:flex;flex-direction:column;gap:8px;">
+                  <div class="vs-ring-row">
+                    <div style="position:relative;width:36px;height:36px;flex-shrink:0;">
+                      <svg viewBox="0 0 52 52" style="width:36px;height:36px;transform:rotate(-90deg);"><circle cx="26" cy="26" r="21" fill="none" stroke="#E5E5EA" stroke-width="5"/><circle cx="26" cy="26" r="21" fill="none" stroke="#1C8838" stroke-width="5" stroke-linecap="round" stroke-dasharray="70 131.95"/></svg>
+                      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#1C8838" stroke-width="2.2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                    </div>
+                    <div class="vs-ring-info"><span class="vs-ring-val">4,268</span><span class="vs-ring-sub">of 8,000 steps</span></div>
+                  </div>
+                  <div class="vs-tip" style="background:linear-gradient(135deg,rgba(52,199,89,.06),rgba(48,209,88,.06));"><span>A 20-min walk after lunch will get you to your goal!</span></div>
+                </div>
+              </div>
+              <div class="vs-mini-grid">
+                <div class="vs-vgroup">
+                  <div class="vs-vgroup-header"><span class="vs-vgroup-title" style="color:#4A6FA5;">Weight</span><span class="vs-vgroup-arrow">›</span></div>
+                  <div style="padding:2px 10px 10px;">
+                    <div class="vs-mini-val">66.5 <span class="vs-mini-unit">kg</span></div>
+                    <div class="vs-mini-sub">May 9, 2026</div>
+                  </div>
+                </div>
+                <div class="vs-vgroup">
+                  <div class="vs-vgroup-header"><span class="vs-vgroup-title" style="color:#D54215;">Pressure</span><span class="vs-vgroup-arrow">›</span></div>
+                  <div style="padding:2px 10px 10px;">
+                    <div class="vs-mini-val">120/80</div>
+                    <div class="vs-mini-sub">Today, 8:00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="vs-vgroup">
+                <div class="vs-vgroup-header"><span class="vs-vgroup-title" style="color:#D54215;">ECG</span><span class="vs-vgroup-arrow">›</span></div>
+                <div style="padding:2px 10px 10px;">
+                  <div class="vs-mini-val">69 <span class="vs-mini-unit">bpm</span></div>
+                  <div class="vs-mini-sub">Today, 8:30</div>
+                </div>
+              </div>
+            </div>
+            <div class="vs-tab-area"><div class="vs-tab-bar">
+              <button class="vs-tab"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg><span>Today</span></button>
+              <button class="vs-tab active"><svg viewBox="0 0 24 24" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Vitals</span></button>
+              <button class="vs-tab"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Circle</span></button>
+            </div><button class="vs-fab"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+          </div>
+          <div class="vs-phone-overlay vs-glaucoma-ol"></div>
+          <div class="vs-phone-overlay vs-macular-ol"></div>
+        </div>
+
+        <!-- CIRCLE -->
+        <div class="vs-phone-col">
+          <span class="vs-screen-name">Circle</span>
+          <div class="vs-phone">
+            <div class="vs-sbar"><span>9:41</span><div class="vs-sbar-icons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6.9c4-4.5 17-4.5 21 0"/><path d="M5 10.5c3-3.5 11-3.5 14 0"/><path d="M8.5 14c2.1-2.5 6-2.5 8 0"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg></div></div>
+            <div class="vs-island"></div>
+            <div class="vs-cnt">
+              <div class="vs-hdr"><h3>Your circle</h3></div>
+              <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#5856D6,#8B85F7);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#fff" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                <div style="display:flex;flex-direction:column;gap:0;flex:1;min-width:0;"><span style="font-size:11px;font-weight:600;color:#1C1C1E;">Dra. García</span><span style="font-size:10px;color:#6E6E73;">Cardiologist</span></div>
+                <span style="font-size:9px;font-weight:500;padding:3px 7px;border-radius:12px;background:#E8F5E9;color:#2E7D32;">Active</span>
+              </div>
+              <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#D01648,#D43A64);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:#fff;">A</div>
+                <div style="display:flex;flex-direction:column;gap:0;flex:1;min-width:0;"><span style="font-size:11px;font-weight:600;color:#1C1C1E;">Ana</span><span style="font-size:10px;color:#6E6E73;">Daughter</span></div>
+                <span style="font-size:9px;font-weight:500;padding:3px 7px;border-radius:12px;background:#E8F5E9;color:#2E7D32;">Active</span>
+              </div>
+              <div style="background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF9F0A,#FFB84D);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:#fff;">C</div>
+                <div style="display:flex;flex-direction:column;gap:0;flex:1;min-width:0;"><span style="font-size:11px;font-weight:600;color:#1C1C1E;">Carlos</span><span style="font-size:10px;color:#6E6E73;">Son</span></div>
+                <span style="font-size:9px;font-weight:500;padding:3px 7px;border-radius:12px;background:#FFF3E0;color:#C54500;">Pending</span>
+              </div>
+              <div style="background:#fff;border-radius:12px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;border:2px dashed #E5E5EA;">
+                <div style="width:34px;height:34px;border-radius:50%;background:rgba(208,22,72,.08);display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#D01648" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></div>
+                <span style="font-size:10px;color:#6E6E73;text-align:center;line-height:15px;">Invite a family member or doctor<br>to view your health data</span>
+                <button style="font-size:10px;font-weight:600;color:#fff;background:linear-gradient(135deg,#D01648,#D43A64);border:none;border-radius:16px;padding:8px 16px;cursor:default;">Send invite</button>
+              </div>
+            </div>
+            <div class="vs-tab-area"><div class="vs-tab-bar">
+              <button class="vs-tab"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg><span>Today</span></button>
+              <button class="vs-tab"><svg viewBox="0 0 24 24" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Vitals</span></button>
+              <button class="vs-tab active"><svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Circle</span></button>
+            </div><button class="vs-fab"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
+          </div>
+          <div class="vs-phone-overlay vs-glaucoma-ol"></div>
+          <div class="vs-phone-overlay vs-macular-ol"></div>
+        </div>
+
+      </div>
+
+      <!-- Annotation card -->
+      <div class="vs-anno">
+        <div class="vs-anno-card">
+          <div class="vs-anno-title" id="vsAnnoTitle">Normal vision</div>
+          <div class="vs-anno-desc" id="vsAnnoDesc">No vision impairment applied. This is how the design looks with 20/20 vision.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07 — BEFORE & AFTER ═══ -->
+<section class="case-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">07</span></div>
+    <h2 class="section-title">Before &amp; After</h2>
+    <div class="section-content">
+      <div class="ba-v3">
+        <div class="ba-v3-row ba-v3-head">
+          <div class="ba-v3-h muted">Metric</div>
+          <div class="ba-v3-h muted">V1</div>
+          <div class="ba-v3-h acc">V2</div>
+        </div>
+        <div class="ba-v3-row">
+          <div class="ba-v3-metric">Text contrast</div>
+          <div class="ba-v3-before">2.4:1</div>
+          <div class="ba-v3-after">4.9:1<small>WCAG AA</small></div>
+        </div>
+        <div class="ba-v3-row">
+          <div class="ba-v3-metric">Touch targets</div>
+          <div class="ba-v3-before">32px</div>
+          <div class="ba-v3-after">44px+<small>WCAG AAA</small></div>
+        </div>
+        <div class="ba-v3-row">
+          <div class="ba-v3-metric">Navigation</div>
+          <div class="ba-v3-before">Icons only</div>
+          <div class="ba-v3-after">Icons + text</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DARK THEME SHOWCASE ═══ -->
+<div class="theme-showcase">
+  <div class="theme-showcase-inner">
+    <div class="theme-phones">
+      <img class="theme-phone tp-float-1" src="images/today-dark.webp" alt="Today dark" loading="lazy" decoding="async">
+      <img class="theme-phone center tp-float-2" src="images/vitals-dark.webp" alt="Vitals dark" loading="lazy" decoding="async">
+      <img class="theme-phone tp-float-3" src="images/circle-dark.webp" alt="Circle dark" loading="lazy" decoding="async">
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ 08 — TAKEAWAYS ═══ -->
+<section class="case-section final-section">
+  <div class="container">
+    <div class="section-label"><span class="section-num">08</span></div>
+    <h2 class="section-title">Takeaways</h2>
+    <div class="section-content">
+      <p class="lead" style="font-size:24px;line-height:36px;">As a team, we built an MVP of the product, but unfortunately never made it to the app store release.</p>
+
+      <p class="lead" style="font-size:24px;line-height:36px;">Still, this project means a lot to me. <strong style="color:#FFB840;">I deeply explored the real problems older people face</strong>, and these are problems I genuinely care about.</p>
+
+      <p class="lead" style="font-size:24px;line-height:36px;">I'm confident that one day I'll launch a product that makes life better for older adults. And to get there, you have to <strong style="color:#FFB840;">fail forward</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER GRADIENT ═══ -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+new Chart(document.getElementById('growthChart'),{
+  type:'bar',
+  data:{
+    labels:['2021','2024','2030','2040','2050'],
+    datasets:[{
+      data:[761,840,1000,1300,1600],
+      backgroundColor:['#e8a08c','#D94F4F','#D94F4F','#D94F4F','#993333'],
+      borderRadius:4,
+      barThickness:40
+    }]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw>=1000?(c.raw/1000).toFixed(1)+'B':c.raw+'M'}}}},
+    scales:{
+      y:{display:true,grid:{color:'rgba(255,255,255,0.06)',drawBorder:false},ticks:{color:'rgba(240,240,240,0.5)',font:{size:11},callback:function(v){return v>=1000?(v/1000).toFixed(1)+'B':v+'M'}}},
+      x:{grid:{display:false},ticks:{color:'rgba(240,240,240,0.5)',font:{size:12}}}
+    }
+  }
+});
+
+/* === Vision Simulation Controller === */
+(function(){
+  const vsConditions = {
+    normal:        { title:'Normal vision', desc:'No vision impairment applied. This is how the design looks with 20/20 vision.' },
+    protanopia:    { title:'Protanopia', desc:'Red-green color blindness (no red cones). Affects ~1% of males. Reds appear dark/brown, green and red are indistinguishable.' },
+    deuteranopia:  { title:'Deuteranopia', desc:'Red-green color blindness (no green cones). Most common type, ~5% of males. Similar to protanopia but reds retain more brightness.' },
+    tritanopia:    { title:'Tritanopia', desc:'Blue-yellow color blindness (no blue cones). Rare (<0.01%). Blues appear greenish, yellows appear pink/violet.' },
+    achromatopsia: { title:'Achromatopsia', desc:'Complete color blindness. Very rare (~0.003%). No color perception, the world is grayscale. Often accompanied by light sensitivity.' },
+    cataract:      { title:'Cataract', desc:'Yellowed lens absorbs blue light, reduces contrast ~25%, adds haze. Affects 50%+ of people over 70. Cards merge into background.' },
+    blurred:       { title:'Blurred vision', desc:'Uncorrected refractive error or presbyopia. Text below 14px becomes unreadable, fine details and thin icons disappear.' },
+    glaucoma:      { title:'Glaucoma', desc:'Peripheral vision loss (tunnel vision). Affects 3% of people over 50. Navigation tabs and side content become invisible.' },
+    macular:       { title:'Macular degeneration', desc:'Central vision loss. Leading cause of vision loss in 60+. The center of focus is obscured, so faces, text, and small UI elements disappear.' },
+    contrast:      { title:'Loss of contrast', desc:'Reduced contrast sensitivity from aging, cataracts, or corneal conditions. Light gray text and subtle dividers become invisible.' },
+    bright:        { title:'Bright light sensitivity', desc:'Photophobia / bright light sensitivity. Common with cataracts and after eye surgery. Screen appears washed out, colors lose saturation.' }
+  };
+  const phoneRow = document.getElementById('vsPhoneRow');
+  const annoTitle = document.getElementById('vsAnnoTitle');
+  const annoDesc = document.getElementById('vsAnnoDesc');
+  const vsBtns = document.querySelectorAll('.vs-btn');
+
+  vsBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var cond = btn.getAttribute('data-vs');
+      phoneRow.className = 'vs-phone-wrap';
+      if (cond !== 'normal') phoneRow.classList.add('vs-condition-' + cond);
+      vsBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-vs') === cond); });
+      var info = vsConditions[cond];
+      annoTitle.textContent = info.title;
+      annoDesc.textContent = info.desc;
+    });
+  });
+})();
+</script>
+
+<!-- ════════ MORE CASES ════════ -->
+<style>
+.mc-section{padding:100px 0 360px;background:transparent;position:relative;overflow:hidden}
+.mc-section::after{content:'';position:absolute;left:50%;bottom:-260px;transform:translateX(-50%);width:140%;height:560px;background:radial-gradient(ellipse at center, rgba(208,22,72,0.20) 0%, rgba(208,22,72,0.08) 35%, transparent 70%);filter:blur(20px);pointer-events:none;z-index:0}
+.mc-container{position:relative;z-index:1}
+.mc-container{max-width:1280px;margin:0 auto;padding:0 48px}
+.mc-head{display:flex;justify-content:center;margin-bottom:96px}
+.mc-title{font-family:var(--sans);font-size:clamp(64px,10.5vw,170px);font-weight:800;letter-spacing:-0.01em;line-height:1;text-transform:uppercase;color:rgba(240,240,240,0.07);white-space:nowrap;user-select:none}
+.mc-num{font-family:var(--mono);font-size:14px;color:rgba(240,240,240,0.3)}
+.mc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mc-card{position:relative;overflow:hidden;display:block;min-height:340px;padding:30px 28px;background:#111113;border:1px solid rgba(255,255,255,0.08);border-radius:24px;transition:border-color .25s, transform .25s;text-decoration:none}
+.mc-card::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:var(--mcc);opacity:0.10;filter:blur(70px);transition:opacity .3s;pointer-events:none}
+.mc-tag{display:block;font-family:var(--mono);font-size:12px;color:var(--mcc);line-height:1.7;margin-bottom:12px;position:relative}
+.mc-card-title{display:block;font-family:var(--sans);font-size:30px;font-weight:700;line-height:1.3;letter-spacing:-0.01em;color:#f0f0f0;max-width:90%;position:relative}
+.mc-cta{position:absolute;left:28px;bottom:26px;font-family:var(--mono);font-size:13px;color:rgba(240,240,240,0.5);transition:color .25s}
+.mc-cover{position:absolute;right:0;bottom:0;width:58%;transform:translate(6%,12%);transition:transform .35s ease;pointer-events:none}
+.mc-card:hover{border-color:var(--mcc);transform:translateY(-4px)}
+.mc-card:hover::before{opacity:0.20}
+.mc-card:hover .mc-cta{color:var(--mcc)}
+.mc-card:hover .mc-cover{transform:translate(4%,8%)}
+@media (max-width: 1000px){.mc-grid{grid-template-columns:1fr;gap:36px}.mc-card{min-height:360px}.mc-cta{display:none}.mc-cover{max-width:340px;bottom:0;top:auto;right:auto;left:50%;transform:translate(-50%,16%)}.mc-card:hover .mc-cover{transform:translate(-50%,12%)}}
+@media (max-width: 700px){.mc-container{padding:0 24px}.mc-section{padding:64px 0}.mc-title{white-space:normal;text-align:center;font-size:clamp(76px,25vw,130px);line-height:0.95}.mc-head{margin-bottom:64px}}
+</style>
+
+<section class="mc-section">
+  <div class="mc-container">
+    <div class="mc-head"><h2 class="mc-title">More cases</h2></div>
+    <div class="mc-grid">
+    <a class="mc-card" style="--mcc:#3d5afe" href="../hyperstudio/">
+      <span class="mc-tag">EDUCATION · INTERNAL PRODUCT · WEB</span>
+      <span class="mc-card-title">In-house admin for content creators</span>
+      <span class="mc-cta">view case &rarr;</span>
+      <img class="mc-cover" src="../covers/In-house admin for content creators.png" alt="In-house admin for content creators" loading="lazy" decoding="async">
+    </a>
+    <a class="mc-card" style="--mcc:#f97316" href="../wasd/">
+      <span class="mc-tag">ENTERTAINMENT · B2C · WEB · MOBILE APP</span>
+      <span class="mc-card-title">Gamifying the Streamer Account</span>
+      <span class="mc-cta">view case &rarr;</span>
+      <img class="mc-cover" src="../covers/Gamifying the streamer account.png" alt="Gamifying the Streamer Account" loading="lazy" decoding="async">
+    </a>
+    <a class="mc-card" style="--mcc:#c8ff00" href="../lionsoul/">
+      <span class="mc-tag">FINTECH · B2B · MOBILE APP</span>
+      <span class="mc-card-title">Invest app for high net worth individuals</span>
+      <span class="mc-cta">view case &rarr;</span>
+      <img class="mc-cover" src="../covers/Invest app for high net worth individuals.png" alt="Invest app for high net worth individuals" loading="lazy" decoding="async">
+    </a>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.body.classList.remove('menu-open');
+    var b=document.querySelector('.nav-burger'); if(b) b.setAttribute('aria-expanded','false');
+  });
+});
+</script>
+</body>
+</html>
