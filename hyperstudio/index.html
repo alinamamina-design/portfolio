@@ -110,7 +110,7 @@ section { padding: 100px 0; }
 
 /* ── Section Label ── */
 .section-label {
-  font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: 0.15em;
+  font-family: var(--mono); font-size: 13px; letter-spacing: 0.15em;
   text-transform: uppercase; color: var(--accent);
   margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
 }
@@ -148,6 +148,18 @@ section { padding: 100px 0; }
   font-family: var(--sans); font-size: var(--fs-lead); line-height: 28px;
   color: var(--text-50); max-width: 720px;
   margin-bottom: 56px; position: relative; z-index: 2;
+}
+.jb-gradient {
+  background: linear-gradient(100deg, #FF318C 0%, #FE5D26 55%, #FDB60D 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 600;
+}
+.hero-logo {
+  width: 192px; height: 192px;
+  position: relative; z-index: 2;
 }
 .hero-screen {
   width: 100%; max-width: 1100px;
@@ -566,6 +578,7 @@ section { padding: 100px 0; }
   <div class="bg-glow"></div>
   <h1 class="hero-title">Creating an in-house <span class="highlight">admin</span></h1>
   <p class="hero-subtitle">A new in-house admin built to replace two legacy tools — cutting company costs and speeding up content creators' work.</p>
+  <img class="hero-logo" src="JetBrains_beam_logo.svg.png" alt="JetBrains logo" width="250" height="250">
 </section>
 
 <!-- ═══ 00 · CONTEXT ═══ -->
@@ -573,7 +586,7 @@ section { padding: 100px 0; }
   <div class="container">
     <div class="section-label">00</div>
     <h2 class="section-title reveal">Company &amp; Product Context</h2>
-    <p class="lead" style="margin-bottom:48px">Hyperskill is a learning platform with 200+ content creators publishing courses every week.</p>
+    <p class="lead" style="margin-bottom:48px">Hyperskill, a <strong class="jb-gradient">JetBrains</strong> company, is a learning platform with 200+ content creators publishing courses every week.</p>
 
     <div class="full-image reveal" style="margin-bottom:16px;">
       <video preload="metadata" src="video/hyperskill.mp4" autoplay loop muted playsinline aria-label="Hyperskill learning platform"></video>

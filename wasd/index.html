@@ -168,7 +168,7 @@ a { color: inherit; text-decoration: none; }
 /* ── Section Label ── */
 .section-label {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent);
@@ -183,7 +183,7 @@ a { color: inherit; text-decoration: none; }
 }
 .section-num {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--accent);
 }
 
@@ -499,12 +499,12 @@ figcaption {
 .context-img::before {
   content: '';
   position: absolute;
-  width: 120%;
-  height: 120%;
+  width: 95%;
+  height: 95%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(168,85,247,0.45) 0%, rgba(157,89,182,0.2) 35%, transparent 65%);
+  background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(157,89,182,0.12) 35%, transparent 60%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
@@ -824,9 +824,9 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
 <!-- ════════ 00 COMPANY & PRODUCT CONTEXT ════════ -->
 <section>
   <div class="container">
-    <div class="section-label"><span class="section-num">00</span></div>
     <div class="split">
       <div class="split-left">
+        <div class="section-label"><span class="section-num">00</span></div>
         <h2 class="split-title">Company &amp; Product Context</h2>
         <p class="lead"><strong>WASD is a streaming platform</strong> and part of the MTS ecosystem. MTS is the largest telecom company in Russia.</p>
       </div>
