@@ -14,790 +14,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #0a0a0a;
-  --surface: #111113;
-  --border: rgba(255,255,255,0.08);
-  --accent: #f97316;
-  --accent-dim: rgba(249,115,22,0.15);
-  --accent2: #fb923c;
-  --text: #f0f0f0;
-  --text-80: rgba(240,240,240,0.8);
-  --text-50: rgba(240,240,240,0.5);
-  --text-30: rgba(240,240,240,0.3);
-  --mono: 'JetBrains Mono', monospace;
-  --sans: 'Inter', system-ui, sans-serif;
-}
-
-html { scroll-behavior: smooth; }
-html { overflow-x: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-img, video { max-width: 100%; }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-img, video { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
-
-/* ── Nav ── */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 48px;
-  background: rgba(10,10,10,0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo {
-  font-family: var(--mono);
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.nav-links {
-  display: flex;
-  gap: 80px;
-  list-style: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.nav-links a {
-  font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-50);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--accent); }
-
-/* ── Container ── */
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 48px;
-}
-
-/* ── Hero ── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 48px 80px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.06) 40%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-.hero-sub {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-50);
-  margin-bottom: 24px;
-}
-.hero-title {
-  font-family: var(--sans);
-  font-size: clamp(56px, 8vw, 96px);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  color: var(--text);
-  margin-bottom: 32px;
-  position: relative;
-  z-index: 1;
-}
-.hero-title .highlight { color: var(--accent); }
-.hero-desc {
-  max-width: 680px;
-  font-size: 18px;
-  line-height: 28px;
-  color: var(--text-80);
-  margin-bottom: 32px;
-}
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-.tag {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 8px 16px;
-  border-radius: 100px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-80);
-  line-height: 16px;
-}
-
-/* ── Section Label ── */
-.section-label {
-  font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.section-label::before {
-  content: '//';
-  color: var(--text-30);
-}
-.section-num {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--accent);
-}
-
-/* ── Section Title ── */
-.section-title {
-  font-family: var(--sans);
-  font-size: clamp(42px, 5vw, 64px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
-  color: var(--text);
-  margin-bottom: 40px;
-}
-
-/* ── Section ── */
-.section-content {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-/* ── Lead ── */
-.lead {
-  margin: 0;
-  max-width: 680px;
-  font-size: 18px;
-  line-height: 28px;
-  color: var(--text-80);
-}
-.lead strong { font-weight: 600; color: var(--text); }
-
-/* ── Final section gradient ── */
-.final-section {
-  position: relative;
-}
-
-/* ── Role split ── */
-.role-split {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
-.role-img img {
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* ── Role list ── */
-.role-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  max-width: 680px;
-}
-.role-list li {
-  font-size: 22px;
-  line-height: 32px;
-  color: var(--text-80);
-  padding: 8px 0 8px 28px;
-  position: relative;
-}
-.role-list li::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 20px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-/* ── Subhead & Caption ── */
-.subhead {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--text-30);
-  text-transform: uppercase;
-  line-height: 16px;
-  margin: 0;
-  padding-top: 16px;
-}
-.caption {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--text-30);
-  text-transform: uppercase;
-  line-height: 16px;
-  margin: -16px 0 0;
-}
-
-/* ── Figures ── */
-figure {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-figcaption {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--text-30);
-  text-transform: uppercase;
-  line-height: 16px;
-}
-.media {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--surface);
-}
-.media.r-lg { border-radius: 33px; }
-.media.r-md { border-radius: 16px; }
-.media img { width: 100%; height: auto; display: block; }
-.media.dark { background: #0b0b0f; }
-.media.noborder { border: 0; background: transparent; }
-
-/* ── Card Frame ── */
-.card-frame {
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 40px;
-  background: var(--surface);
-}
-
-/* ── Callout ── */
-.callout {
-  display: block;
-  padding: 16px 20px;
-  border-left: 3px solid var(--accent);
-  background: rgba(249,115,22,0.08);
-  font-size: 18px;
-  line-height: 28px;
-  color: var(--text-80);
-  border-radius: 0 8px 8px 0;
-}
-.callout strong { color: var(--text); font-weight: 600; }
-
-/* ── Metric Tree ── */
-.metric-tree {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--border);
-}
-.mt-top {
-  background: var(--surface);
-  padding: 0 0 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.mt-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  line-height: 14px;
-  font-weight: 500;
-}
-.mt-title {
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 44px;
-  letter-spacing: -0.02em;
-}
-.mt-desc {
-  font-size: 18px;
-  line-height: 28px;
-  color: var(--text-50);
-  margin: 0;
-}
-.mt-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-.mt-metric {
-  background: var(--surface);
-  padding: 32px 32px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.mt-metric:first-child { padding-left: 0; }
-.mt-metric:last-child { padding-right: 0; }
-.mt-metric-name {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 30px;
-}
-.mt-metric-desc {
-  font-size: 15px;
-  line-height: 22px;
-  color: var(--text-50);
-}
-
-/* ── Challenges ── */
-.challenges {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.challenge {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 40px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background: var(--surface);
-}
-.challenge + .challenge {
-  border-left: 1px solid var(--border);
-}
-.challenge-num {
-  font-size: 48px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1;
-  letter-spacing: -1px;
-}
-.challenge-num .star { font-weight: 400; margin-left: 4px; }
-.challenge-num .star.green { color: var(--accent); }
-.challenge-num .star.pink { color: var(--accent2); }
-.challenge-text {
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 32px;
-  color: var(--text);
-}
-.challenge-text .hl-pink { color: var(--accent); }
-.challenge-text .hl-purple { color: var(--accent2); }
-
-/* ── Design Flow ── */
-.flow {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-.flow-step {
-  background: var(--surface);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.flow-step:nth-child(4n+1) { padding-left: 0; }
-.flow-step:nth-child(4n) { padding-right: 0; }
-.flow-step:nth-child(-n+4) { padding-top: 0; }
-.flow-step:nth-child(n+5) { padding-bottom: 0; }
-.flow-num {
-  font-family: var(--mono);
-  font-size: 32px;
-  font-weight: 500;
-  letter-spacing: -1px;
-  color: var(--accent);
-  line-height: 32px;
-}
-.flow-text {
-  font-size: 17px;
-  line-height: 24px;
-  font-weight: 500;
-  color: var(--text-80);
-}
-
-/* ── Solution visual with 3D decorations ── */
-.solution-visual {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.deco {
-  position: absolute;
-  width: 100px;
-  height: auto;
-  z-index: 2;
-  pointer-events: none;
-}
-.deco-tr {
-  top: -30px; right: -40px;
-  animation: float-tr 6s ease-in-out infinite;
-}
-.deco-bl {
-  bottom: -30px; left: -40px;
-  animation: float-bl 7s ease-in-out infinite;
-}
-@keyframes float-tr {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(6deg); }
-}
-@keyframes float-bl {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(10px) rotate(-5deg); }
-}
-
-/* ── Context image glow ── */
-.context-img {
-  position: relative;
-}
-.context-img::before {
-  content: '';
-  position: absolute;
-  width: 95%;
-  height: 95%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(157,89,182,0.12) 35%, transparent 60%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-.context-img figure {
-  position: relative; z-index: 1;
-  animation: float-context 6s ease-in-out infinite;
-}
-@keyframes float-context {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* ── Split layout ── */
-.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center; }
-.split-left { display: flex; flex-direction: column; gap: 24px; }
-.split-title {
-  font-size: 48px; font-weight: 700; letter-spacing: -0.03em;
-  line-height: 1.15; color: var(--text);
-}
-.split-right .media { border-radius: 16px; }
-
-/* ── Concepts Grid ── */
-.concepts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.concepts-grid .media { aspect-ratio: auto; background: var(--surface); }
-.cnum {
-  font-family: var(--mono);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.05em;
-}
-
-/* ── Team ── */
-.team {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  text-align: center;
-}
-.team-member {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.team-avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--bg);
-}
-.team-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.team-role {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-30);
-  line-height: 16px;
-}
-
-/* ── Stats Row ── */
-.rstats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.rstats > div {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.rstats h3 {
-  margin: 0;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 56px;
-  letter-spacing: -0.02em;
-  color: var(--text-50);
-}
-.rstats h3 .num {
-  color: var(--accent);
-  font-weight: 700;
-}
-.rstats p {
-  margin: 8px 0 0;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--text-50);
-}
-
-/* ── Image Grid ── */
-.img-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-/* ── Impact ── */
-.impact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.imp-num {
-  margin: 0;
-  font-size: clamp(64px, 7vw, 96px);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-}
-.imp-lbl {
-  margin: 12px 0 0;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-30);
-  line-height: 16px;
-}
-.imp-sub {
-  margin: 4px 0 0;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--text-50);
-}
-.impact {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.impact > div {
-  padding: 24px 20px 20px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.impact > div + div {
-  border-left: 1px solid var(--border);
-  padding-left: 20px;
-}
-.impact .num {
-  margin: 0;
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 64px;
-  letter-spacing: -1.12px;
-}
-.impact .lbl {
-  margin: 2px 0 0;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-30);
-  line-height: 16px;
-}
-
-section { padding: 100px 0; }
-
-/* ── Burger ── */
-.nav-burger {
-  display: none;
-  width: 40px; height: 40px;
-  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-  background: none; border: 0; cursor: pointer; padding: 0;
-}
-.nav-burger span {
-  display: block; width: 20px; height: 1.5px;
-  background: var(--text-80); border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.2s ease;
-}
-body.menu-open .nav-burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-body.menu-open .nav-burger span:nth-child(2) { opacity: 0; }
-body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-
-/* ── Responsive ── */
-/* ── Mobile (Lionsoul principles) ── */
-@media (max-width: 900px) {
-  .nav { padding: calc(16px + env(safe-area-inset-top)) 24px 16px; flex-wrap: wrap; }
-  .nav-burger { display: flex; }
-  .nav-links {
-    position: static; left: auto; transform: none;
-    flex-basis: 100%; min-width: 100%;
-    flex-direction: column; gap: 0;
-    background: transparent;
-    border-bottom: 0;
-    padding: 0;
-    max-height: 0; overflow: hidden;
-    opacity: 0; pointer-events: none;
-    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
-  }
-  body.menu-open .nav-links { max-height: 80vh; opacity: 1; pointer-events: auto; padding: 8px 0 16px; }
-  .nav-links a { display: block; font-family: var(--sans); font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; text-transform: none; color: #fff; padding: 18px 0; }
-  .context-img::before { width: 100%; height: 100%; }
-  .container { padding: 0 24px; }
-  section { padding: 60px 0; }
-  .final-section { padding: 60px 0 80px !important; }
-  .t-section { padding: 60px 0 80px !important; }
-  .hero { min-height: auto; padding: 160px 24px 80px; }
-  .hero::before { width: 380px; height: 380px; }
-  .hero-title { font-size: clamp(40px, 11vw, 56px); }
-  .section-title { font-size: 40px; line-height: 46px; letter-spacing: -0.02em; margin-bottom: 32px; }
-  .card-frame { padding: 24px; border-radius: 16px; }
-  .media.r-lg { border-radius: 14px; }
-  .lead, .callout { font-size: 17px; line-height: 27px; }
-  .split { grid-template-columns: 1fr; gap: 32px; }
-  .split-title { font-size: 40px; }
-  .role-split { grid-template-columns: 1fr; gap: 32px; }
-  .role-list li { font-size: 18px; line-height: 28px; }
-  .role-img { max-width: 320px; margin: 0 auto; }
-  .challenges { grid-template-columns: 1fr; }
-  .challenge + .challenge { border-left: 1px solid var(--border); }
-  .mt-row { grid-template-columns: 1fr; }
-  .mt-metric, .mt-metric:first-child, .mt-metric:last-child { padding: 20px 0; }
-  .mt-metric:last-child { padding-bottom: 0; }
-  .mt-top { padding: 0 0 20px; }
-  .mt-title { font-size: 28px; line-height: 36px; }
-  .flow { grid-template-columns: 1fr 1fr; }
-  .flow-step, .flow-step:nth-child(4n+1), .flow-step:nth-child(4n),
-  .flow-step:nth-child(-n+4), .flow-step:nth-child(n+5) { padding: 20px; }
-  .flow-step:nth-child(odd) { padding-left: 0; }
-  .flow-step:nth-child(even) { padding-right: 0; }
-  .flow-step:nth-child(-n+2) { padding-top: 0; }
-  .flow-step:nth-child(n+7) { padding-bottom: 0; }
-  .concepts-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cnum { font-size: 18px; }
-  .team { grid-template-columns: 1fr; gap: 32px; }
-  .rstats { grid-template-columns: 1fr; gap: 20px; }
-  .rstats h3 { font-size: 40px; line-height: 46px; }
-  .img-grid { grid-template-columns: 1fr; }
-  .impact-grid { grid-template-columns: 1fr; }
-  .impact { grid-template-columns: 1fr; }
-  .impact > div { padding: 20px 0; }
-  .impact > div + div { border-left: 0; border-top: 1px solid var(--border); padding-left: 0; }
-  .imp-num { font-size: clamp(48px, 13vw, 64px); }
-  .solution-visual { max-width: 100%; }
-  .deco { width: 64px; }
-  .deco-tr { top: -16px; right: -8px; }
-  .deco-bl { bottom: -16px; left: -8px; }
-  .testimonial-card { padding: 28px; }
-  .testimonial-quote { font-size: 18px; margin-bottom: 24px; }
-  .testimonial-author { flex-wrap: wrap; }
-  .testimonial-link { flex-basis: 100%; text-align: center; margin-top: 8px; }
-}
-
-/* ── Tablet ── */
-@media (min-width: 600px) and (max-width: 899px) {
-  .hero-title { font-size: clamp(48px, 9vw, 72px); }
-  .section-title { font-size: clamp(44px, 7vw, 56px); line-height: 1.12; }
-  .split-title { font-size: clamp(32px, 5vw, 40px); }
-  .lead, .callout { font-size: 17px; line-height: 27px; }
-  .role-list li { font-size: 20px; line-height: 30px; }
-  .challenges { grid-template-columns: 1fr 1fr; }
-  .mt-row { grid-template-columns: repeat(3, 1fr); }
-  .mt-metric, .mt-metric:first-child, .mt-metric:last-child { padding: 24px 20px 0; }
-  .mt-metric:first-child { padding-left: 0; }
-  .mt-metric:last-child { padding-right: 0; }
-  .mt-top { padding: 0 0 24px; }
-  .mt-title { font-size: 30px; line-height: 38px; }
-  .img-grid { grid-template-columns: 1fr 1fr; }
-  .impact-grid { grid-template-columns: 1fr 1fr; }
-  .imp-num { font-size: clamp(48px, 8vw, 72px); }
-  .team { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .rstats { grid-template-columns: repeat(3, 1fr); }
-  .rstats h3 { font-size: 44px; line-height: 50px; }
-  .testimonial-quote { font-size: 20px; }
-  .testimonial-author { flex-wrap: nowrap; }
-  .testimonial-link { flex-basis: auto; text-align: left; margin-top: 0; }
-}
-
-/* ── Small phones ── */
-@media (max-width: 600px) {
-  .hero-title { font-size: clamp(36px, 12vw, 44px); }
-  .flow { grid-template-columns: 1fr; }
-  .flow-step, .flow-step:nth-child(4n+1), .flow-step:nth-child(4n),
-  .flow-step:nth-child(-n+4), .flow-step:nth-child(n+5),
-  .flow-step:nth-child(odd), .flow-step:nth-child(even) { padding: 16px 0; }
-  .flow-step:first-child { padding-top: 0; }
-  .flow-step:last-child { padding-bottom: 0; }
-  .concepts-grid { gap: 10px; }
-}
-</style>
+<link rel="stylesheet" href="case-study-dark-wide.css?v=2">
 </head>
 <body>
 
@@ -809,9 +29,9 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="../">Home</a>
+    <!-- About page not built yet: <a href="#">About</a> -->
+    <a href="../#contact">Contact</a>
   </div>
 </nav>
 
@@ -899,8 +119,8 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
     <div class="section-content">
       <p class="lead">I designed a gamification layer — the <strong>Streamer League</strong> — where streamers compete against each other and earn cash payouts based on their ranking.</p>
       <div class="solution-visual">
-        <img class="deco deco-tr" src="Rock.png" alt="" loading="lazy" decoding="async" width="226" height="216">
-        <img class="deco deco-bl" src="Round Cube.png" alt="" loading="lazy" decoding="async" width="164" height="156">
+        <img class="deco deco-tr" src="Rock.webp" alt="" loading="lazy" decoding="async" width="226" height="216">
+        <img class="deco deco-bl" src="Round Cube.webp" alt="" loading="lazy" decoding="async" width="164" height="156">
         <figure>
           <div class="media noborder"><img src="image 1.webp" alt="Streamer League mockups — mobile and desktop views showing ranking, earnings, and competition mechanics" loading="lazy" decoding="async" width="1202" height="1154"></div>
         </figure>
@@ -940,12 +160,12 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
       <p class="lead">We had <strong>six competing concepts</strong>. The goal was to test different kinds of widgets and new terminology.</p>
 
       <div class="concepts-grid">
-        <figure><span class="cnum">01</span><div class="media dark"><img src="image 3.1.png" alt="Concept 1 — dashboard with compact league table and earnings widget" loading="lazy" decoding="async" width="440" height="248"></div></figure>
-        <figure><span class="cnum">02</span><div class="media dark"><img src="image 3.2.png" alt="Concept 2 — card-based layout with streamer progress and payout tiers" loading="lazy" decoding="async" width="440" height="276"></div></figure>
-        <figure><span class="cnum">03</span><div class="media dark"><img src="image 3.3.png" alt="Concept 3 — timeline view with weekly milestones and reward indicators" loading="lazy" decoding="async" width="440" height="322"></div></figure>
-        <figure><span class="cnum">04</span><div class="media dark"><img src="image 3.4.png" alt="Concept 4 — minimal dashboard focused on ranking position and next goal" loading="lazy" decoding="async" width="440" height="370"></div></figure>
-        <figure><span class="cnum">05</span><div class="media dark"><img src="image 3.5.png" alt="Concept 5 — gamified view with achievement badges and level progression" loading="lazy" decoding="async" width="440" height="372"></div></figure>
-        <figure><span class="cnum">06</span><div class="media dark"><img src="image 3.6.png" alt="Concept 6 — data-heavy layout with detailed statistics and comparison charts" loading="lazy" decoding="async" width="440" height="274"></div></figure>
+        <figure><span class="cnum">01</span><div class="media dark"><img src="image 3.1.webp" alt="Concept 1 — dashboard with compact league table and earnings widget" loading="lazy" decoding="async" width="440" height="248"></div></figure>
+        <figure><span class="cnum">02</span><div class="media dark"><img src="image 3.2.webp" alt="Concept 2 — card-based layout with streamer progress and payout tiers" loading="lazy" decoding="async" width="440" height="276"></div></figure>
+        <figure><span class="cnum">03</span><div class="media dark"><img src="image 3.3.webp" alt="Concept 3 — timeline view with weekly milestones and reward indicators" loading="lazy" decoding="async" width="440" height="322"></div></figure>
+        <figure><span class="cnum">04</span><div class="media dark"><img src="image 3.4.webp" alt="Concept 4 — minimal dashboard focused on ranking position and next goal" loading="lazy" decoding="async" width="440" height="370"></div></figure>
+        <figure><span class="cnum">05</span><div class="media dark"><img src="image 3.5.webp" alt="Concept 5 — gamified view with achievement badges and level progression" loading="lazy" decoding="async" width="440" height="372"></div></figure>
+        <figure><span class="cnum">06</span><div class="media dark"><img src="image 3.6.webp" alt="Concept 6 — data-heavy layout with detailed statistics and comparison charts" loading="lazy" decoding="async" width="440" height="274"></div></figure>
       </div>
 
       <p class="caption">6 concepts tested</p>
@@ -961,15 +181,15 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
     <div class="section-content">
       <div class="team">
         <div class="team-member">
-          <div class="team-avatar"><img src="Avatar.png" alt="Designer" loading="lazy" decoding="async" width="300" height="300"></div>
+          <div class="team-avatar"><img src="Avatar.webp" alt="Designer" loading="lazy" decoding="async" width="300" height="300"></div>
           <span class="team-role">Designer</span>
         </div>
         <div class="team-member">
-          <div class="team-avatar"><img src="image 4.2.png" alt="Designer" loading="lazy" decoding="async" width="300" height="300"></div>
+          <div class="team-avatar"><img src="image 4.2.webp" alt="Designer" loading="lazy" decoding="async" width="300" height="300"></div>
           <span class="team-role">Designer</span>
         </div>
         <div class="team-member">
-          <div class="team-avatar"><img src="image 4.3.png" alt="UX Researcher" loading="lazy" decoding="async" width="300" height="300"></div>
+          <div class="team-avatar"><img src="image 4.3.webp" alt="UX Researcher" loading="lazy" decoding="async" width="300" height="300"></div>
           <span class="team-role">UX Researcher</span>
         </div>
       </div>
@@ -1022,17 +242,17 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
 
       <div class="img-grid">
         <figure>
-          <div class="media dark r-md"><img src="image 6.2.png" alt="Streamer account settings — profile, payout details, and notification preferences" loading="lazy" decoding="async" width="656" height="472"></div>
+          <div class="media dark r-md"><img src="image 6.2.webp" alt="Streamer account settings — profile, payout details, and notification preferences" loading="lazy" decoding="async" width="656" height="472"></div>
           <figcaption>Account</figcaption>
         </figure>
         <figure>
-          <div class="media dark r-md"><img src="image 6.3.png" alt="Streaming statistics — hours streamed, viewer count trends, and performance metrics" loading="lazy" decoding="async" width="644" height="464"></div>
+          <div class="media dark r-md"><img src="image 6.3.webp" alt="Streaming statistics — hours streamed, viewer count trends, and performance metrics" loading="lazy" decoding="async" width="644" height="464"></div>
           <figcaption>Statistics</figcaption>
         </figure>
       </div>
 
       <figure>
-        <div class="media dark r-lg"><img src="image 6.4.png" alt="League results dashboard — final rankings, payout amounts, and season summary" loading="lazy" decoding="async" width="1376" height="990"></div>
+        <div class="media dark r-lg"><img src="image 6.4.webp" alt="League results dashboard — final rankings, payout amounts, and season summary" loading="lazy" decoding="async" width="1376" height="990"></div>
         <figcaption>Results dashboard</figcaption>
       </figure>
     </div>
@@ -1132,30 +352,10 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
 </section>
 
 <!-- ════════ MORE CASES ════════ -->
-<style>
-.mc-section{padding:100px 0 360px;background:transparent;position:relative;overflow:hidden}
-.mc-section::after{content:'';position:absolute;left:50%;bottom:-260px;transform:translateX(-50%);width:140%;height:560px;background:radial-gradient(ellipse at center, rgba(249,115,22,0.18) 0%, rgba(249,115,22,0.07) 35%, transparent 70%);filter:blur(20px);pointer-events:none;z-index:0}
-.mc-container{position:relative;z-index:1}
-.mc-container{max-width:1280px;margin:0 auto;padding:0 48px}
-.mc-head{display:flex;justify-content:center;margin-bottom:96px}
-.mc-title{font-family:var(--sans);font-size:clamp(64px,10.5vw,170px);font-weight:800;letter-spacing:-0.01em;line-height:1;text-transform:uppercase;color:rgba(249,115,22,0.22);white-space:nowrap;user-select:none}
-.mc-num{font-family:var(--mono);font-size:14px;color:rgba(240,240,240,0.3)}
-.mc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.mc-card{position:relative;overflow:hidden;display:block;min-height:340px;padding:30px 28px;background:#111113;border:1px solid rgba(255,255,255,0.08);border-radius:24px;transition:border-color .25s, transform .25s;text-decoration:none}
-.mc-card::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:var(--mcc);opacity:0.10;filter:blur(70px);transition:opacity .3s;pointer-events:none}
-.mc-tag{display:block;font-family:var(--mono);font-size:12px;color:var(--mcc);line-height:1.7;margin-bottom:12px;position:relative}
-.mc-card-title{display:block;font-family:var(--sans);font-size:30px;font-weight:700;line-height:1.3;letter-spacing:-0.01em;color:#f0f0f0;max-width:90%;position:relative}
-.mc-cta{position:absolute;left:28px;bottom:26px;font-family:var(--mono);font-size:13px;color:rgba(240,240,240,0.5);transition:color .25s}
-.mc-cover{position:absolute;right:0;bottom:0;width:58%;height:auto;transform:translate(6%,12%);transition:transform .35s ease;pointer-events:none}
-.mc-card:hover{border-color:var(--mcc);transform:translateY(-4px)}
-.mc-card:hover::before{opacity:0.20}
-.mc-card:hover .mc-cta{color:var(--mcc)}
-.mc-card:hover .mc-cover{transform:translate(4%,8%)}
-@media (max-width: 1000px){.mc-grid{grid-template-columns:1fr;gap:36px}.mc-card{min-height:330px}.mc-cta{display:none}.mc-card-title{max-width:100%}.mc-cover{max-width:340px;bottom:0;top:auto;right:auto;left:50%;transform:translate(-50%,16%)}.mc-card:hover .mc-cover{transform:translate(-50%,12%)}}
-@media (min-width: 600px) and (max-width: 1000px){.mc-card{min-height:420px}}
-@media (max-width: 700px){.mc-container{padding:0 24px}.mc-section{padding:64px 0}.mc-title{white-space:normal;text-align:center;font-size:clamp(76px,25vw,130px);line-height:0.95}.mc-head{margin-bottom:64px}}
-</style>
+<link rel="stylesheet" href="../assets/case-shared.css?v=2">
+<style>.mc-end{--mc-glow1:rgba(249,115,22,0.18);--mc-glow2:rgba(249,115,22,0.07);--mc-title-c:rgba(249,115,22,0.22)}</style>
 
+<div class="mc-end">
 <section class="mc-section">
   <div class="mc-container">
     <div class="mc-head"><h2 class="mc-title">More cases</h2></div>
@@ -1164,31 +364,31 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
       <span class="mc-tag">EDUCATION · INTERNAL PRODUCT · WEB</span>
       <span class="mc-card-title">In-house admin for content creators</span>
       <span class="mc-cta">view case &rarr;</span>
-      <img class="mc-cover" src="../covers/In-house admin for content creators.png" alt="In-house admin for content creators" loading="lazy" decoding="async" width="501" height="384">
+      <img class="mc-cover" src="../covers/In-house admin for content creators.webp" alt="In-house admin for content creators" loading="lazy" decoding="async" width="501" height="384">
     </a>
     <a class="mc-card" style="--mcc:#c8ff00" href="../lionsoul/">
       <span class="mc-tag">FINTECH · B2B · MOBILE APP</span>
       <span class="mc-card-title">Invest app for high net worth individuals</span>
       <span class="mc-cta">view case &rarr;</span>
-      <img class="mc-cover" src="../covers/Invest app for high net worth individuals.png" alt="Invest app for high net worth individuals" loading="lazy" decoding="async" width="495" height="375">
+      <img class="mc-cover" src="../covers/Invest app for high net worth individuals.webp" alt="Invest app for high net worth individuals" loading="lazy" decoding="async" width="495" height="375">
     </a>
     <a class="mc-card" style="--mcc:#D01648" href="../healthcare/">
       <span class="mc-tag">HEALTHCARE · B2C · MOBILE APP</span>
       <span class="mc-card-title">Health app for older adults</span>
       <span class="mc-cta">view case &rarr;</span>
-      <img class="mc-cover" src="../covers/Health app for older adults.png" alt="Health app for older adults" loading="lazy" decoding="async" width="510" height="396">
+      <img class="mc-cover" src="../covers/Health app for older adults.webp" alt="Health app for older adults" loading="lazy" decoding="async" width="510" height="396">
     </a>
     </div>
   </div>
 </section>
 
-<script>
-document.querySelectorAll('.nav-links a').forEach(function(a){
-  a.addEventListener('click', function(){
-    document.body.classList.remove('menu-open');
-    var b=document.querySelector('.nav-burger'); if(b) b.setAttribute('aria-expanded','false');
-  });
-});
-</script>
+<footer class="site-footer">
+  <span>© 2026 Alina Mamina</span>
+  <span>Designed &amp; built by me</span>
+</footer>
+</div>
+
+<script src="../assets/case-shared.js" defer></script>
+<script src="../assets/analytics.js" defer></script>
 </body>
 </html>
