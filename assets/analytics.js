@@ -1,30 +1,20 @@
-// Amplitude analytics — shared by all pages.
-// Setup: paste your project's API key below.
-//   Amplitude → Settings (⚙) → Projects → <your project> → API Key
-// The key is a public client-side key — safe to keep in the repo.
-var AMPLITUDE_API_KEY = 'PASTE_API_KEY_HERE';
-var AMPLITUDE_SERVER_ZONE = 'EU'; // 'EU' or 'US' — must match where the Amplitude project was created
-
+// Amplitude analytics + session replay — shared by all pages.
+// Uses Amplitude's official per-project script loader (no build step needed).
+// Project API key is a public client-side key — safe to keep in the repo.
 (function () {
-  if (!AMPLITUDE_API_KEY || AMPLITUDE_API_KEY.indexOf('PASTE') === 0) return; // not configured yet
+  var KEY = '2b12c0cb2a76dd4daca04e77e0b561da';
 
   var s = document.createElement('script');
-  s.src = 'https://cdn.amplitude.com/libs/analytics-browser-2-min.js.gz';
+  s.src = 'https://cdn.amplitude.com/script/' + KEY + '.js';
   s.async = true;
   s.onload = function () {
     if (!window.amplitude) return;
 
-    amplitude.init(AMPLITUDE_API_KEY, {
-      serverZone: AMPLITUDE_SERVER_ZONE,
-      autocapture: {
-        pageViews: true,
-        sessions: true,
-        elementInteractions: true,
-        attribution: true,
-        formInteractions: false,
-        fileDownloads: false
-      }
-    });
+    // Session Replay: record 100% of sessions (low-traffic portfolio)
+    amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+
+    // Autocapture: page views, sessions, attribution, element clicks, downloads
+    amplitude.init(KEY, { autocapture: true });
 
     // ── Portfolio-specific events ──
     // Home: which case card was opened
