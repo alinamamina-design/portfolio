@@ -15,21 +15,21 @@
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="hyperstudio-case.css?v=3">
+<link rel="stylesheet" href="hyperstudio-case.css?v=5">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
 <!-- ── Nav ── -->
 <nav class="nav">
-  <div class="nav-logo">Alina Mamina</div>
+  <a class="nav-logo" href="../">Alina Mamina</a>
   <button class="nav-burger" aria-label="Open menu" aria-expanded="false" onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'));">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
-    <li><a href="../">Home</a></li>
-    <!-- About page not built yet: <li><a href="#">About</a></li> -->
     <li><a href="../#contact">Contact</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="https://docs.google.com/document/d/14BQ60RLtn9UqW3jtOu4Pa4d_0MMHYRSp/edit" target="_blank" rel="noopener">CV</a></li>
   </ul>
 </nav>
 
@@ -46,7 +46,8 @@
   <div class="container">
     <div class="section-label">00</div>
     <h2 class="section-title reveal">Company &amp; Product Context</h2>
-    <p class="lead" style="margin-bottom:48px">Hyperskill, a <strong class="jb-gradient">JetBrains</strong> company, is a learning platform with 200+ content creators publishing courses every week.</p>
+    <p class="lead" style="margin-bottom:20px">Hyperskill, a <strong class="jb-gradient">JetBrains</strong> company, is a learning platform with 200+ content creators publishing courses every week.</p>
+    <a class="about-website meta-link" href="https://hyperskill.org/" target="_blank" rel="noopener" style="margin-bottom:48px">hyperskill.org <span class="meta-link-arrow">↗</span></a>
 
     <div class="full-image reveal" style="margin-bottom:16px;">
       <video preload="metadata" src="video/hyperskill.mp4" autoplay loop muted playsinline aria-label="Hyperskill learning platform"></video>

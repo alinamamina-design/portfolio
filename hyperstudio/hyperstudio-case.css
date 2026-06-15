@@ -52,7 +52,7 @@ body {
 }
 .nav-logo {
   font-family: var(--mono); font-size: 15px; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--accent);
+  text-transform: uppercase; color: var(--accent); text-decoration: none;
 }
 .nav-links { display: flex; gap: 80px; list-style: none;
 }
@@ -537,3 +537,18 @@ section { padding: 100px 0; }
   .role-item p .muted { color: var(--text-50); }
   @media (max-width: 900px) { .role-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; } }
   @media (max-width: 600px) { .role-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* Company website link (matches Lionsoul About link, page accent) */
+.about-website {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.about-website:hover { opacity: 0.7; }
+.meta-link-arrow { transition: transform 0.25s ease; }
+.about-website:hover .meta-link-arrow { transform: translate(2px, -2px); }

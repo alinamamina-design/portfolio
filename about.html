@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Alina Mamina</title>
+<meta name="description" content="Product designer based in Madrid. I teach product design at Yandex Practicum, build design and sports communities, and lead projects end-to-end.">
+<meta name="author" content="Alina Mamina">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="About — Alina Mamina">
+<meta property="og:description" content="Product designer based in Madrid. I teach product design at Yandex Practicum, build design and sports communities, and lead projects end-to-end.">
+<meta property="og:image" content="https://alinamamina-design.github.io/portfolio/covers/og-home.png">
+<meta property="og:url" content="https://alinamamina-design.github.io/portfolio/about.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --bg:#0a0a0a; --surface:#111113; --border:rgba(255,255,255,0.08);
+  --text:#f0f0f0; --text-80:rgba(240,240,240,0.8); --text-50:rgba(240,240,240,0.5); --text-30:rgba(240,240,240,0.3);
+  --mono:'JetBrains Mono',monospace; --sans:'Inter',system-ui,sans-serif;
+  --c-hyper:#3d5afe; --c-wasd:#f97316; --c-lion:#c8ff00; --c-health:#D01648;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 48px}
+
+/* ── Nav ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:24px 48px;background:rgba(10,10,10,0.4);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
+.nav-links{display:flex;gap:48px;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-50);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-burger{display:none;background:transparent;border:0;cursor:pointer;width:32px;height:32px;padding:0;position:relative;z-index:101}
+.nav-burger span{display:block;position:absolute;left:6px;right:6px;height:1.5px;background:var(--text);border-radius:1px;transition:transform .25s,opacity .2s,top .25s}
+.nav-burger span:nth-child(1){top:10px}
+.nav-burger span:nth-child(2){top:15px}
+.nav-burger span:nth-child(3){top:20px}
+body.menu-open .nav-burger span:nth-child(1){top:15px;transform:rotate(45deg)}
+body.menu-open .nav-burger span:nth-child(2){opacity:0}
+body.menu-open .nav-burger span:nth-child(3){top:15px;transform:rotate(-45deg)}
+
+/* ── Hero ── */
+.hero{padding:180px 0 80px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-glow::before{content:'';position:absolute;top:-200px;right:-150px;width:600px;height:600px;border-radius:50%;background:var(--c-lion);opacity:.06;filter:blur(120px)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center}
+.hero-title{font-size:clamp(44px,6.4vw,84px);font-weight:800;letter-spacing:-0.03em;line-height:1.04;margin-bottom:28px}
+.hero-title .hl{color:var(--c-lion)}
+.hero-lead{font-size:19px;line-height:1.7;color:var(--text-80);max-width:560px;margin-bottom:40px}
+.hero-photo{border-radius:24px;overflow:hidden;border:1px solid var(--border);align-self:stretch}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ── Content section ── */
+.section{padding:80px 0}
+.section-head{margin-bottom:56px}
+.section-title{font-size:clamp(38px,5.5vw,68px);font-weight:700;letter-spacing:-0.02em;line-height:1.1}
+.section-title .hl{color:var(--accent,var(--c-lion))}
+.section-intro{font-size:18px;line-height:1.7;color:var(--text-80);margin-top:20px;max-width:680px}
+
+/* ── Editorial rows (text left, image right) ── */
+.rows{display:flex;flex-direction:column;gap:80px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.row-img{border-radius:16px;overflow:hidden}
+.row-img img{width:100%;height:auto;display:block}
+.row-img.narrow{max-width:440px;margin-left:auto}
+.row-stat{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,var(--c-lion));display:block;margin-bottom:16px}
+.row-title{font-size:clamp(24px,2.6vw,32px);font-weight:700;letter-spacing:-0.01em;line-height:1.2;margin-bottom:16px}
+.row-text{font-size:17px;line-height:1.65;color:var(--text-80);max-width:460px}
+
+/* ── Closing statement ── */
+.statement{padding:280px 0 140px;text-align:center;position:relative;overflow:hidden}
+.statement::before{content:'';position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:1100px;height:560px;border-radius:50%;background:radial-gradient(ellipse at center, rgba(240,240,240,0.07) 0%, rgba(240,240,240,0.03) 35%, transparent 70%);filter:blur(40px);pointer-events:none;z-index:0}
+.statement p{position:relative;z-index:1;font-size:clamp(26px,3.6vw,46px);font-weight:700;letter-spacing:-0.02em;line-height:1.22;max-width:900px;margin:0 auto}
+.statement .hl{color:var(--text-50)}
+
+/* ── Contact / footer ── */
+.contact{padding:120px 0 140px;position:relative;text-align:center}
+.contact-title{font-size:clamp(44px,7vw,96px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:40px;color:var(--c-lion)}
+.contact-email{font-family:var(--mono);font-size:clamp(15px,1.8vw,20px);letter-spacing:.04em;color:var(--text);transition:color .25s}
+.contact-email:hover{color:var(--c-lion)}
+.socials{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:56px}
+.social-btn{font-family:var(--mono);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-80);border:1px solid var(--border);padding:17px 32px;border-radius:100px;transition:color .25s,border-color .25s,transform .25s}
+.social-btn:hover{color:var(--sc,var(--c-lion));border-color:var(--sc,var(--c-lion));transform:translateY(-2px)}
+.page-end{position:relative;overflow:hidden}
+.page-end::before{content:'';position:absolute;bottom:-260px;right:-150px;width:600px;height:600px;border-radius:50%;background:var(--c-hyper);opacity:.08;filter:blur(120px);pointer-events:none}
+.page-end::after{content:'';position:absolute;bottom:-280px;left:-150px;width:500px;height:500px;border-radius:50%;background:var(--c-health);opacity:.07;filter:blur(120px);pointer-events:none}
+.footer{position:relative;z-index:1;padding:32px 48px;display:flex;justify-content:space-between;align-items:center}
+.footer span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-30)}
+
+/* ── Responsive ── */
+@media (max-width:900px){
+  .nav{flex-wrap:wrap}
+  .nav-burger{display:block}
+  .nav-links{flex-basis:100%;min-width:100%;flex-direction:column;gap:0;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease,padding .3s ease}
+  .nav-links a{display:block;font-family:var(--sans);font-size:44px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;text-transform:none;color:#fff;padding:16px 0}
+  body.menu-open .nav-links{max-height:80vh;opacity:1;pointer-events:auto;padding:8px 0 16px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-photo{max-width:420px}
+  .row{grid-template-columns:1fr;gap:24px}
+  .row-img{order:-1;max-width:520px}
+  .row-text{max-width:none}
+}
+@media (max-width:700px){
+  .container{padding:0 24px}
+  .nav{padding:16px 24px}
+  .hero{padding:130px 0 60px}
+  .footer{padding:24px;flex-direction:column;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Alina Mamina</a>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false"
+    onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'));">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://docs.google.com/document/d/14BQ60RLtn9UqW3jtOu4Pa4d_0MMHYRSp/edit" target="_blank" rel="noopener">CV</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1 class="hero-title">Hi, I'm <span class="hl">Alina</span>!</h1>
+      <p class="hero-lead">For the past 5 years I've lived in Georgia, Portugal, and now I've settled in Madrid, Spain.</p>
+    </div>
+    <div class="hero-photo">
+      <img src="about-images/portrait.webp" alt="Alina Mamina" width="960" height="1280">
+    </div>
+  </div>
+</header>
+
+<!-- ── Design community ── -->
+<section class="section" style="--accent:var(--c-hyper)">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Giving back to the <span class="hl">design community</span></h2>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div>
+          <span class="row-stat">4 years teaching</span>
+          <h3 class="row-title">Yandex Practicum</h3>
+          <p class="row-text">For 4 years I've taught product design at Russia's largest online school, guiding hundreds of students into the field.</p>
+        </div>
+        <div class="row-img"><img src="about-images/yandex-practicum.webp" alt="Teaching product design at Yandex Practicum" loading="lazy" width="1080" height="720"></div>
+      </div>
+      <div class="row">
+        <div>
+          <span class="row-stat">300 members</span>
+          <h3 class="row-title">Design community in Georgia</h3>
+          <p class="row-text">Founded and led a 300-person design community, running regular events and meetups.</p>
+        </div>
+        <div class="row-img"><img src="about-images/georgian-community.webp" alt="Design community event in Georgia" loading="lazy" width="1080" height="720"></div>
+      </div>
+      <div class="row">
+        <div>
+          <span class="row-stat">Women in Tech</span>
+          <h3 class="row-title">Mentorship</h3>
+          <p class="row-text">Mentored at Women in Tech and gave career guidance to junior designers finding their footing.</p>
+        </div>
+        <div class="row-img"><img src="about-images/women-in-tech.webp" alt="Women in Tech mentorship recognition" loading="lazy" width="1602" height="1142"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Outside of work ── -->
+<section class="section" style="--accent:var(--c-health)">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Outside of <span class="hl">work</span></h2>
+      <p class="section-intro">I'm into all kinds of sports: triathlon, CrossFit, surfing, hiking. And I love getting out into nature.</p>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div>
+          <span class="row-stat">Ironman 70.3 · 2027</span>
+          <h3 class="row-title">My goal</h3>
+          <p class="row-text">Training toward the Ironman 70.3 in Cascais, Portugal — endurance is my kind of long-term project.</p>
+        </div>
+        <div class="row-img narrow"><img src="about-images/ironman.webp" alt="Triathlon training" loading="lazy" width="741" height="900"></div>
+      </div>
+      <div class="row">
+        <div>
+          <span class="row-stat">150 members</span>
+          <h3 class="row-title">Lisbon sport communities</h3>
+          <p class="row-text">Founded a 150-person hiking community and led runs for the Founders Running Club.</p>
+        </div>
+        <div class="row-img"><img src="about-images/lisbon-community.webp" alt="Hiking community in Lisbon" loading="lazy" width="1280" height="666"></div>
+      </div>
+      <div class="row">
+        <div>
+          <span class="row-stat">70 members &amp; growing</span>
+          <h3 class="row-title">Madrid hiking community</h3>
+          <p class="row-text">Now growing a new hiking community in Madrid — 70 people so far.</p>
+        </div>
+        <div class="row-img"><img src="about-images/madrid-community.webp" alt="Hiking community in Madrid" loading="lazy" width="960" height="900"></div>
+      </div>
+    </div>
+
+    <div class="statement">
+      <p>I start things and bring people together — <span class="hl">whether it's my own project or one I'm invited to lead.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<div class="page-end">
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="contact-title">Let's talk.</h2>
+    <a class="contact-email" href="mailto:alinamamina.id@gmail.com">alinamamina.id@gmail.com</a>
+    <div class="socials">
+      <a class="social-btn" style="--sc:var(--c-hyper)" href="https://www.linkedin.com/in/alina-m-id/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="social-btn" style="--sc:var(--c-wasd)" href="https://t.me/alina_m_id" target="_blank" rel="noopener">Telegram</a>
+      <a class="social-btn" style="--sc:var(--c-health)" href="https://wa.me/79851116008" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>© 2026 Alina Mamina</span>
+  <span>Designed &amp; built by me</span>
+</footer>
+</div>
+
+<script>
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.body.classList.remove('menu-open');
+    var b=document.querySelector('.nav-burger'); if(b) b.setAttribute('aria-expanded','false');
+  });
+});
+</script>
+<script src="assets/analytics.js" defer></script>
+</body>
+</html>

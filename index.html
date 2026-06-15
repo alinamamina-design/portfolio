@@ -39,8 +39,14 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;gap:80px;list-style:none}
 .nav-links a{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-50);transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-50);transition:color .2s}
-.nav-cta:hover{color:var(--text)}
+.nav-burger{display:none;background:transparent;border:0;cursor:pointer;width:32px;height:32px;padding:0;position:relative;z-index:101}
+.nav-burger span{display:block;position:absolute;left:6px;right:6px;height:1.5px;background:var(--text);border-radius:1px;transition:transform .25s,opacity .2s,top .25s}
+.nav-burger span:nth-child(1){top:10px}
+.nav-burger span:nth-child(2){top:15px}
+.nav-burger span:nth-child(3){top:20px}
+body.menu-open .nav-burger span:nth-child(1){top:15px;transform:rotate(45deg)}
+body.menu-open .nav-burger span:nth-child(2){opacity:0}
+body.menu-open .nav-burger span:nth-child(3){top:15px;transform:rotate(-45deg)}
 
 /* ── Section label ── */
 .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-50);margin-bottom:16px;display:flex;align-items:center;gap:8px}
@@ -86,7 +92,7 @@ a{color:inherit;text-decoration:none}
 .case .title{font-weight:700;letter-spacing:-0.02em;line-height:1.1;font-size:clamp(32px,3.2vw,46px)}
 .case .desc{color:var(--text-80);line-height:1.65;margin-top:22px;max-width:92%}
 .case .stats{display:flex;gap:40px;margin-top:36px}
-.case .stat-num{font-size:28px;font-weight:800;color:var(--c);letter-spacing:-0.01em}
+.case .stat-num{font-size:40px;font-weight:800;color:var(--c);letter-spacing:-0.01em}
 .case .stat-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-50);margin-top:6px}
 .case .cta{font-family:var(--mono);font-size:14px;color:var(--text-50);margin-top:44px;display:inline-flex;align-items:center;gap:8px;transition:color .25s}
 .case .cta .arrow{transition:transform .3s ease}
@@ -139,14 +145,18 @@ a{color:inherit;text-decoration:none}
 
 /* ── Contact / footer ── */
 .page-end{position:relative;overflow:hidden}
-.page-end::before{content:'';position:absolute;bottom:-300px;left:50%;transform:translateX(-50%);width:900px;height:600px;border-radius:50%;background:var(--c-hyper);opacity:.08;filter:blur(140px);pointer-events:none}
+.page-end::before{content:'';position:absolute;bottom:-260px;right:-150px;width:600px;height:600px;border-radius:50%;background:var(--c-hyper);opacity:.08;filter:blur(120px);pointer-events:none}
+.page-end::after{content:'';position:absolute;bottom:-280px;left:-150px;width:500px;height:500px;border-radius:50%;background:var(--c-health);opacity:.07;filter:blur(120px);pointer-events:none}
 .contact{padding:300px 0 270px;position:relative;text-align:center}
 .contact-inner{position:relative;z-index:2}
 .contact .section-label{justify-content:center}
-.contact-title{font-size:clamp(40px,6vw,84px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin-bottom:28px}
+.contact-title{font-size:clamp(52px,8.5vw,120px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin-bottom:52px;color:var(--c-lion)}
 .contact-sub{font-size:18px;color:var(--text-80);max-width:520px;margin:0 auto 44px}
-.contact-email{font-family:var(--mono);font-size:clamp(16px,2.2vw,22px);letter-spacing:.04em;color:var(--text);border-bottom:1px solid var(--text-30);padding-bottom:4px;transition:border-color .25s,color .25s}
-.contact-email:hover{color:var(--c-lion);border-color:var(--c-lion)}
+.contact-email{font-family:var(--mono);font-size:clamp(15px,1.8vw,20px);letter-spacing:.04em;color:var(--text);transition:color .25s}
+.contact-email:hover{color:var(--c-lion)}
+.socials{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:72px}
+.social-btn{font-family:var(--mono);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-80);border:1px solid var(--border);padding:17px 32px;border-radius:100px;transition:color .25s,border-color .25s,transform .25s}
+.social-btn:hover{color:var(--sc,var(--c-lion));border-color:var(--sc,var(--c-lion));transform:translateY(-2px)}
 .footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:center}
 .footer span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-30)}
 
@@ -158,7 +168,11 @@ html.js .reveal.visible{opacity:1;transform:none}
 
 /* ── Responsive ── */
 @media (max-width:1000px){
-  .nav-links{display:none}
+  .nav{flex-wrap:wrap}
+  .nav-burger{display:block}
+  .nav-links{position:static;flex-basis:100%;min-width:100%;flex-direction:column;gap:0;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:max-height .3s ease,opacity .25s ease,padding .3s ease}
+  .nav-links a{display:block;font-family:var(--sans);font-size:44px;font-weight:800;letter-spacing:-0.03em;line-height:1.1;text-transform:none;color:#fff;padding:16px 0}
+  body.menu-open .nav-links{max-height:80vh;opacity:1;pointer-events:auto;padding:8px 0 16px}
   .case{grid-template-columns:1fr;height:auto}
   .case .cta{display:none}
   .case-media{min-height:300px}
@@ -185,9 +199,14 @@ html.js .reveal.visible{opacity:1;transform:none}
 
 <nav class="nav">
   <a class="nav-logo" href="index.html">Alina Mamina</a>
+  <button class="nav-burger" aria-label="Open menu" aria-expanded="false"
+    onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'));">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
-    <!-- About page not built yet: <li><a href="about.html">About</a></li> -->
     <li><a href="#contact">Contact</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="https://docs.google.com/document/d/14BQ60RLtn9UqW3jtOu4Pa4d_0MMHYRSp/edit" target="_blank" rel="noopener">CV</a></li>
   </ul>
 </nav>
 
@@ -218,9 +237,9 @@ html.js .reveal.visible{opacity:1;transform:none}
       <a class="case reveal" href="lionsoul/"
          style="--c:var(--c-lion);--glow:rgba(200,255,0,0.08);--media:#0e3b34;--glow2:rgba(200,255,0,0.10)">
         <div class="case-text">
-          <span class="tag">FINTECH · B2B · MOBILE APP</span>
+          <span class="tag">FINTECH · MOBILE APP</span>
           <h2 class="title">Invest app for high net worth individuals</h2>
-          <p class="desc">Launched a private-banking investment app from 0 to 1 — onboarding, portfolio, analytics and withdrawals, built end-to-end.</p>
+          <p class="desc">Launched a private-banking investment app as the design owner — end-to-end.</p>
           <div class="stats">
             <div><div class="stat-num">3 mo</div><div class="stat-lbl">To launch</div></div>
             <div><div class="stat-num">6→2 wk</div><div class="stat-lbl">Time-to-market</div></div>
@@ -243,7 +262,7 @@ html.js .reveal.visible{opacity:1;transform:none}
           <p class="desc">Designed an internal admin that replaced two legacy tools — speeding up 200+ content creators and cutting company costs.</p>
           <div class="stats">
             <div><div class="stat-num">2→1</div><div class="stat-lbl">Legacy tools replaced</div></div>
-            <div><div class="stat-num">200+</div><div class="stat-lbl">Content creators</div></div>
+            <div><div class="stat-num">−28%</div><div class="stat-lbl">Time per topic</div></div>
           </div>
           <span class="cta">view case <span class="arrow">→</span></span>
         </div>
@@ -261,7 +280,7 @@ html.js .reveal.visible{opacity:1;transform:none}
         <div class="case-text">
           <span class="tag">ENTERTAINMENT · B2C · WEB · MOBILE APP</span>
           <h2 class="title">Gamifying the Streamer Account</h2>
-          <p class="desc">Turned a flat partner dashboard into a game: leagues, scores and live leaderboards that give streamers a reason to climb.</p>
+          <p class="desc">Built a game for the streamer account: leagues, scores and live leaderboards that give streamers a reason to climb.</p>
           <div class="stats">
             <div><div class="stat-num">+19%</div><div class="stat-lbl">Active streamers</div></div>
             <div><div class="stat-num">+41%</div><div class="stat-lbl">Hours streamed</div></div>
@@ -269,8 +288,8 @@ html.js .reveal.visible{opacity:1;transform:none}
           <span class="cta">view case <span class="arrow">→</span></span>
         </div>
         <div class="case-media cover">
-          <video class="hover-play" muted playsinline preload="metadata" poster="wasd/wasd-poster.jpg">
-            <source src="wasd/wasd-clean.mp4" type="video/mp4">
+          <video class="hover-play" muted playsinline preload="metadata" poster="wasd/wasd-poster.jpg?v=4">
+            <source src="wasd/wasd-clean.mp4?v=4" type="video/mp4">
           </video>
         </div>
       </a>
@@ -279,11 +298,10 @@ html.js .reveal.visible{opacity:1;transform:none}
       <a class="case reveal" href="healthcare/"
          style="--c:var(--c-health);--glow:rgba(208,22,72,0.10);--media:#19090f;--glow2:rgba(208,22,72,0.16)">
         <div class="case-text">
-          <span class="tag">HEALTHCARE · B2C · MOBILE APP</span>
+          <span class="tag">HEALTHCARE · B2C · MOBILE APP · SIDE PROJECT</span>
           <h2 class="title">Health app for older adults</h2>
-          <p class="desc">An accessibility-first health companion — vitals, reminders and check-ups designed to stay clear for stressed or impaired users.</p>
+          <p class="desc">A simple, accessibility-first health companion — vitals, reminders and check-ups.</p>
           <div class="stats">
-            <div><div class="stat-num">65+</div><div class="stat-lbl">Primary users</div></div>
             <div><div class="stat-num">WCAG</div><div class="stat-lbl">Accessibility-first</div></div>
           </div>
           <span class="cta">view case <span class="arrow">→</span></span>
@@ -351,8 +369,13 @@ html.js .reveal.visible{opacity:1;transform:none}
 <div class="page-end">
 <section class="contact" id="contact">
   <div class="container contact-inner">
-    <h2 class="contact-title">Let's build something<br>that matters.</h2>
-    <a class="contact-email" href="mailto:alinamamina95@gmail.com">alinamamina95@gmail.com</a>
+    <h2 class="contact-title">Let's talk.</h2>
+    <a class="contact-email" href="mailto:alinamamina.id@gmail.com">alinamamina.id@gmail.com</a>
+    <div class="socials">
+      <a class="social-btn" style="--sc:var(--c-hyper)" href="https://www.linkedin.com/in/alina-m-id/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="social-btn" style="--sc:var(--c-wasd)" href="https://t.me/alina_m_id" target="_blank" rel="noopener">Telegram</a>
+      <a class="social-btn" style="--sc:var(--c-health)" href="https://wa.me/79851116008" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
   </div>
 </section>
 
@@ -404,6 +427,14 @@ const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} });
 },{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Close mobile menu after tapping a nav link
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.body.classList.remove('menu-open');
+    var b=document.querySelector('.nav-burger'); if(b) b.setAttribute('aria-expanded','false');
+  });
+});
 </script>
 
 <script src="assets/analytics.js" defer></script>

@@ -15,22 +15,22 @@
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="case-study.css?v=3">
+<link rel="stylesheet" href="case-study.css?v=6">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
 <!-- ── Nav ── -->
 <nav class="nav">
-  <div class="nav-logo">Alina Mamina</div>
+  <a class="nav-logo" href="../">Alina Mamina</a>
   <button class="nav-burger" aria-label="Open menu" aria-expanded="false"
     onclick="document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',document.body.classList.contains('menu-open'));">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
-    <li><a href="../">Home</a></li>
-    <!-- About page not built yet: <li><a href="#">About</a></li> -->
     <li><a href="../#contact">Contact</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="https://docs.google.com/document/d/14BQ60RLtn9UqW3jtOu4Pa4d_0MMHYRSp/edit" target="_blank" rel="noopener">CV</a></li>
   </ul>
 </nav>
 
@@ -85,6 +85,7 @@
             <span class="meta-value">EU, UK & US</span>
           </div>
         </div>
+        <a class="about-website meta-link" href="https://lionsoul.com/" target="_blank" rel="noopener">lionsoul.com <span class="meta-link-arrow">↗</span></a>
       </div>
       <div class="about-image reveal">
         <img src="images/image 2.webp" alt="London at night" loading="lazy" decoding="async" width="780" height="1040">
@@ -201,7 +202,7 @@
             <div class="ttm-bar-head"><span class="ttm-bar-label">After · MFA flow</span><span class="ttm-bar-val">2 weeks</span></div>
             <div class="ttm-bar-track"><div class="ttm-bar-fill"></div></div>
           </div>
-          <div class="ttm-note">Measured by comparing an average flow we built before (Withdrawal flow) against a flow built after the new system (MFA flow).</div>
+          <div class="ttm-note">Measured by comparing an average flow we built before (Withdrawal flow, KYC, KYB, Individual Sign In flow, Individual Sign Up flow) against a flow built after the new system (MFA flow, Invest flow, Top Up flow, Entity Sign In flow, Entity Sign Up flow).</div>
         </div>
       </div>
     </div>
