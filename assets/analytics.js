@@ -31,6 +31,31 @@
       return;
     }
 
+    // Short, human page name → attached to EVERY event so charts can group
+    // by `page_name` (Home / About / Lionsoul / Hyperstudio / WASD / Health)
+    // instead of the long full page titles. Matches both prod clean URLs
+    // (/lionsoul/, /wasd/, …) and the working-copy paths.
+    function shortPageName() {
+      var p = location.pathname.toLowerCase();
+      if (/lionsoul/.test(p)) return 'Lionsoul';
+      if (/hyperstudio/.test(p)) return 'Hyperstudio';
+      if (/wasd/.test(p)) return 'WASD';
+      if (/health/.test(p)) return 'Health';
+      if (/about/.test(p)) return 'About';
+      return 'Home';
+    }
+    var PAGE_NAME = shortPageName();
+    amplitude.add({
+      name: 'page-name-enrichment',
+      type: 'enrichment',
+      setup: function () { return Promise.resolve(); },
+      execute: function (event) {
+        event.event_properties = event.event_properties || {};
+        if (event.event_properties.page_name == null) event.event_properties.page_name = PAGE_NAME;
+        return Promise.resolve(event);
+      }
+    });
+
     // Session Replay: record 100% of sessions (low-traffic portfolio)
     amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
 
