@@ -71,6 +71,21 @@
         amplitude.track('Testimonial LinkedIn Clicked', { person: name ? name.textContent.trim() : '' });
       });
     });
+
+    // Time on page → "Page Time" event with seconds, for avg-time-per-page.
+    // (Amplitude has no native per-page duration; this provides it.)
+    var pgStart = Date.now(), pgSent = false;
+    function sendPageTime() {
+      if (pgSent) return; pgSent = true;
+      var sec = Math.round((Date.now() - pgStart) / 1000);
+      if (sec > 0 && sec < 3600) {
+        amplitude.track('Page Time', { page: location.pathname, page_title: document.title, seconds: sec });
+      }
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') sendPageTime();
+    });
+    window.addEventListener('pagehide', sendPageTime);
   };
   document.head.appendChild(s);
 })();
