@@ -52,7 +52,7 @@
     <a class="about-website meta-link" href="https://hyperskill.org/" target="_blank" rel="noopener" style="margin-bottom:48px">hyperskill.org <span class="meta-link-arrow">↗</span></a>
 
     <div class="full-image reveal" style="margin-bottom:16px;">
-      <video preload="metadata" src="video/hyperskill.mp4" autoplay loop muted playsinline aria-label="Hyperskill learning platform"></video>
+      <video class="lazyvid" preload="none" poster="video/hyperskill-poster.jpg" src="video/hyperskill.mp4" loop muted playsinline aria-label="Hyperskill learning platform" style="aspect-ratio:1280/720"></video>
     </div>
     <p class="mediacap" style="margin-bottom:64px">Hyperskill learning platform</p>
 
@@ -157,7 +157,7 @@
 
     <div class="behind-item reveal">
       <div class="behind-img" style="margin-bottom:8px;">
-        <video preload="metadata" src="video/concepts.mp4" autoplay loop muted playsinline aria-label="Walkthrough of concept exploration for the admin interface"></video>
+        <video class="lazyvid" preload="none" poster="video/concepts-poster.jpg" src="video/concepts.mp4" loop muted playsinline aria-label="Walkthrough of concept exploration for the admin interface" style="aspect-ratio:1280/710"></video>
       </div>
       <p class="mediacap">Concepts</p>
     </div>
@@ -174,7 +174,7 @@
       <div class="twoup">
         <div>
           <div class="side" style="margin-bottom:8px; overflow:hidden;">
-            <video preload="metadata" src="video/topic-creation.mp4" autoplay loop muted playsinline aria-label="Screencast of the redesigned topic creation flow in Hyperstudio" style="margin-left:-4px; width:calc(100% + 4px);"></video>
+            <video class="lazyvid" preload="none" poster="video/topic-creation-poster.jpg" src="video/topic-creation.mp4" loop muted playsinline aria-label="Screencast of the redesigned topic creation flow in Hyperstudio" style="margin-left:-4px; width:calc(100% + 4px); aspect-ratio:1920/1080;"></video>
           </div>
           <p class="mediacap">Topic creation</p>
         </div>
@@ -198,7 +198,7 @@
         </div>
         <div>
           <div class="side" style="margin-bottom:8px; overflow:hidden;">
-            <video preload="metadata" src="video/statistic.mp4" autoplay loop muted playsinline aria-label="Screencast of the redesigned statistics dashboard in Hyperstudio" style="margin-left:-4px; width:calc(100% + 4px);"></video>
+            <video class="lazyvid" preload="none" poster="video/statistic-poster.jpg" src="video/statistic.mp4" loop muted playsinline aria-label="Screencast of the redesigned statistics dashboard in Hyperstudio" style="margin-left:-4px; width:calc(100% + 4px); aspect-ratio:1280/720;"></video>
           </div>
           <p class="mediacap">Statistics</p>
         </div>
@@ -327,6 +327,15 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Play screencast videos only while in view (saves ~2.9MB on initial load)
+const vidObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.play().catch(() => {}); }
+    else { e.target.pause(); }
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('video.lazyvid').forEach(v => vidObs.observe(v));
 </script>
 
 <!-- ════════ 11 MY TEAM ════════ -->
