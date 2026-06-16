@@ -72,6 +72,32 @@
       });
     });
 
+    // CV opened (Google Doc in the nav) — strong hiring-intent signal
+    document.querySelectorAll('a[href*="docs.google.com/document"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        amplitude.track('CV Opened');
+      });
+    });
+
+    // Social buttons (LinkedIn / Telegram / WhatsApp) — contact intent, with platform
+    document.querySelectorAll('a.social-btn').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var h = a.getAttribute('href') || '';
+        var platform = /linkedin\.com/.test(h) ? 'LinkedIn'
+                     : /t\.me/.test(h) ? 'Telegram'
+                     : /wa\.me/.test(h) ? 'WhatsApp'
+                     : a.textContent.trim();
+        amplitude.track('Social Link Clicked', { platform: platform });
+      });
+    });
+
+    // Health case: which vision condition the visitor simulated (data-vs)
+    document.querySelectorAll('button.vs-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        amplitude.track('Vision Filter Tested', { condition: b.getAttribute('data-vs') || b.textContent.trim() });
+      });
+    });
+
     // Time on page → "Page Time" event with seconds, for avg-time-per-page.
     // (Amplitude has no native per-page duration; this provides it.)
     var pgStart = Date.now(), pgSent = false;
