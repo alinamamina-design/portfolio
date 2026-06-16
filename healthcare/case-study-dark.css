@@ -455,7 +455,7 @@ figcaption {
 /* ── Theme Showcase ── */
 .theme-showcase {
   padding: 96px 0;
-  background: radial-gradient(ellipse at center, rgba(232,48,96,0.06) 0%, transparent 60%);
+  background: radial-gradient(ellipse 70% 55% at center, rgba(232,48,96,0.22) 0%, rgba(232,48,96,0.08) 45%, transparent 72%);
 }
 .theme-showcase-inner {
   max-width: 1280px;
@@ -522,9 +522,9 @@ figcaption {
 .section-content { display: flex; flex-direction: column; gap: 40px; }
 
 /* ── Redesign Phone Showcase (dark frame) ── */
-.rd-showcase { padding: 48px 0 96px; margin-bottom: 96px; background: radial-gradient(ellipse at center, rgba(255,160,60,0.05) 0%, transparent 60%); }
+.rd-showcase { padding: 48px 0 96px; margin-bottom: 96px; background: radial-gradient(ellipse 70% 55% at center, rgba(208,22,72,0.18) 0%, rgba(208,22,72,0.06) 45%, transparent 70%); }
 .rd-showcase .rd-inner img { margin-bottom: 24px; }
-.rd-inner { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; align-items: flex-start; }
+.rd-inner { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
 .rd-col { display: flex; flex-direction: column; align-items: center; gap: 24px; }
 .rd-col:nth-child(1) img { animation: rdFloat1 4s ease-in-out infinite; }
 .rd-col:nth-child(2) img { animation: rdFloat2 4.5s ease-in-out 0.3s infinite; }
