@@ -4,17 +4,40 @@
 (function () {
   var KEY = '2b12c0cb2a76dd4daca04e77e0b561da';
 
+  // ── Internal / team opt-out ──────────────────────────────────────────────
+  // Your own visits shouldn't pollute analytics. Mark a device ONCE by opening
+  // any page with ?team=1 (persists in localStorage); clear with ?team=off.
+  // When marked, nothing is sent to Amplitude (no events, no session replay).
+  var IS_TEAM = false;
+  try {
+    var qp = new URLSearchParams(location.search);
+    if (qp.has('team')) {
+      var v = qp.get('team');
+      if (v === '0' || v === 'off' || v === 'false') localStorage.removeItem('am_team');
+      else localStorage.setItem('am_team', '1');
+    }
+    IS_TEAM = localStorage.getItem('am_team') === '1';
+  } catch (e) {}
+
   var s = document.createElement('script');
   s.src = 'https://cdn.amplitude.com/script/' + KEY + '.js';
   s.async = true;
   s.onload = function () {
     if (!window.amplitude) return;
 
+    // Team devices: init opted-out so no data leaves the browser, then stop.
+    if (IS_TEAM) {
+      amplitude.init(KEY, { optOut: true });
+      return;
+    }
+
     // Session Replay: record 100% of sessions (low-traffic portfolio)
     amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
 
-    // Autocapture: page views, sessions, attribution, element clicks, downloads
-    amplitude.init(KEY, { autocapture: true });
+    // Autocapture: page views, sessions, attribution, element clicks, downloads.
+    // optOut:false explicitly re-enables a device that was previously a team
+    // device (Amplitude persists opt-out, so clearing the flag must reset it).
+    amplitude.init(KEY, { autocapture: true, optOut: false });
 
     // ── Portfolio-specific events ──
     // Home: which case card was opened
