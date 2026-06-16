@@ -480,13 +480,13 @@ figcaption {
   justify-content: center;
 }
 .theme-phone {
-  height: 640px;
-  width: auto;
+  width: 300px;
+  height: auto;
   border-radius: 24px;
   filter: drop-shadow(0 24px 60px rgba(0,0,0,.5));
 }
 .theme-phone.center {
-  height: 640px;
+  width: 300px;
 }
 .tp-float-1 { animation: tpFloat1 4s ease-in-out infinite; }
 .tp-float-2 { animation: tpFloat2 4.5s ease-in-out 0.3s infinite; }
@@ -524,7 +524,7 @@ figcaption {
 /* ── Redesign Phone Showcase (dark frame) ── */
 .rd-showcase { padding: 48px 0 96px; margin-bottom: 96px; background: radial-gradient(ellipse 70% 55% at center, rgba(208,22,72,0.18) 0%, rgba(208,22,72,0.06) 45%, transparent 70%); }
 .rd-showcase .rd-inner img { margin-bottom: 24px; }
-.rd-inner { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+.rd-inner { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .rd-col { display: flex; flex-direction: column; align-items: center; gap: 24px; }
 .rd-col:nth-child(1) img { animation: rdFloat1 4s ease-in-out infinite; }
 .rd-col:nth-child(2) img { animation: rdFloat2 4.5s ease-in-out 0.3s infinite; }
