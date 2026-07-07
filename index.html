@@ -70,11 +70,6 @@ body.menu-open .nav-burger span:nth-child(3){top:15px;transform:rotate(-45deg)}
 .hero-link{font-family:var(--mono);font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-50);transition:color .25s}
 .hero-link:hover{color:var(--text)}
 
-/* ── Marquee strip ── */
-.strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:2;background:var(--bg)}
-.strip-track{display:inline-block;animation:marquee 40s linear infinite}
-.strip span{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-50);margin-right:64px}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ── Section heading ── */
 .work{padding:140px 0 60px}
@@ -224,14 +219,6 @@ html.js .reveal.visible{opacity:1;transform:none}
     <h1 class="hero-title">I design for the business, <span class="dim">not just the screens.</span></h1>
   </div>
 </header>
-
-<!-- ── Skills strip ── -->
-<div class="strip" aria-hidden="true">
-  <div class="strip-track">
-    <span>Business thinking</span><span>Complex systems</span><span>Big data visualization</span><span>Design systems</span><span>0→1 product launches</span><span>Team leadership</span><span>End-to-end delivery</span>
-    <span>Business thinking</span><span>Complex systems</span><span>Big data visualization</span><span>Design systems</span><span>0→1 product launches</span><span>Team leadership</span><span>End-to-end delivery</span>
-  </div>
-</div>
 
 <!-- ── Work ── -->
 <section class="work" id="work">

@@ -215,34 +215,6 @@ section { padding: 100px 0; }
   position: relative;
   z-index: 2;
 }
-.hero-bottom-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-  white-space: nowrap;
-}
-.hero-bottom-bar .marquee {
-  display: inline-flex;
-  animation: marquee 20s linear infinite;
-}
-.hero-bottom-bar span {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-30);
-  padding: 20px 48px;
-  display: inline-block;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
 /* ── Divider ── */
 .divider {
   display: none;
