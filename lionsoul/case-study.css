@@ -665,6 +665,7 @@ body.menu-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rot
   transition: opacity 0.2s;
 }
 .behind-link:hover { opacity: 0.7; }
+.behind-desc { max-width: 640px; margin: -4px 0 24px; font-size: 17px; line-height: 1.6; color: var(--text-50); }
 .behind-img {
   width: 100%;
 }
